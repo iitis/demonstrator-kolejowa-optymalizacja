@@ -1,3 +1,87 @@
+# 
+
+---
+
+````markdown
+## Konfiguracja środowiska (Linux)
+
+Projekt wykorzystuje izolowane środowisko Pythona, aby zapewnić
+powtarzalność wyników oraz zgodność wersji bibliotek.
+
+Wszystkie polecenia należy wykonać w katalogu głównym repozytorium.
+
+---
+
+### 1. Utworzenie środowiska wirtualnego
+
+```bash
+python3 -m venv .venv
+````
+
+---
+
+### 2. Aktywacja środowiska
+
+```bash
+source .venv/bin/activate
+```
+
+Po aktywacji w linii poleceń pojawi się prefiks:
+
+```
+(.venv)
+```
+
+---
+
+### 3. Aktualizacja pip
+
+```bash
+pip install --upgrade pip
+```
+
+---
+
+### 4. Instalacja zależności
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 5. (Opcjonalnie, zalecane) instalacja projektu w trybie developerskim
+
+Jeśli projekt posiada `setup.py` lub `pyproject.toml`:
+
+```bash
+pip install -e .
+```
+
+Pozwala to na poprawne rozpoznawanie importów między modułami.
+
+---
+
+### 6. Dezaktywacja środowiska
+
+```bash
+deactivate
+```
+
+---
+
+## Każde kolejne uruchomienie projektu
+
+Wystarczy ponownie aktywować środowisko:
+
+```bash
+source .venv/bin/activate
+```
+
+```
+```
+
+
 # quantum-stochastic-optimization-railways
 Application of quantum computation for stochastic optimization on the example of railway/tramway network in Baltimore.
 

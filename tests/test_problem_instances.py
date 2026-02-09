@@ -16,15 +16,10 @@ def test_1train_qubo():
 
     file_input = "tests/files/1train_QUBO.json"
 
-    prepare_qubo(trains_input, q_par, file_input)
+    compare_qubo = prepare_qubo(trains_input, q_par, "")
 
     with open(file_input, 'rb') as fp:
         created_qubo = pickle.load(fp)
-
-    file_input = "tests/files/sols4comparison/qubo_1t_delays_no_2_2.0_4.0.json"
-
-    with open(file_input, 'rb') as fp:
-        compare_qubo = pickle.load(fp)
 
     for k, value in created_qubo.items():
         assert value == compare_qubo[k]
@@ -43,15 +38,11 @@ def test_2train_qubo():
 
     q_par.dmax = 2
 
-    prepare_qubo(trains_input, q_par, file_input)
+    compare_qubo = prepare_qubo(trains_input, q_par, "")
 
     with open(file_input, 'rb') as fp:
         created_qubo = pickle.load(fp)
 
-    file_input = "tests/files/sols4comparison/qubo_2t_delays_no_2_2.0_4.0.json"
-
-    with open(file_input, 'rb') as fp:
-        compare_qubo = pickle.load(fp)
 
     for k, value in created_qubo.items():
         assert value == compare_qubo[k]
@@ -69,15 +60,10 @@ def test_4train_qubo():
 
     file_input = "tests/files/4train_QUBO.json"
 
-    prepare_qubo(trains_input, q_par, file_input)
+    compare_qubo = prepare_qubo(trains_input, q_par, "")
 
     with open(file_input, 'rb') as fp:
         created_qubo = pickle.load(fp)
-
-    file_input = "tests/files/sols4comparison/qubo_4t_delays_no_2_2.0_4.0.json"
-
-    with open(file_input, 'rb') as fp:
-        compare_qubo = pickle.load(fp)
 
     for k, value in created_qubo.items():
         assert value == compare_qubo[k]

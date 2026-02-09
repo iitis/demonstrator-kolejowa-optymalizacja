@@ -5,9 +5,10 @@ import matplotlib.pyplot as plt
 
 from QTrains import Analyze_qubo
 from QTrains import file_LP_output, file_QUBO, file_QUBO_comp, file_hist
-from QTrains import solve_on_LP, prepare_qubo, solve_qubo, analyze_qubo_Dwave
-from QTrains import display_prec_feasibility, plot_hist_pass_obj
-from QTrains import plot_title, _ax_hist_passing_times, _ax_objective, passing_time_histigrams, objective_histograms, energies_histograms
+from QTrains import solve_on_LP, prepare_qubo, solve_qubo1, analyze_qubo_Dwave
+from QTrains import display_prec_feasibility1, plot_hist_pass_obj, analyze_qubo_Dwave1
+from QTrains import plot_title, _ax_hist_passing_times, _ax_objective, energies_histograms
+from QTrains import passing_time_histigrams1, objective_histograms1, energies_histograms1, plot_hist_pass_obj1
 from QTrains import analyze_QUBO_outputs, get_solutions_from_dmode, save_qubo_4gates_comp, first_with_given_objective
 
 
@@ -63,28 +64,6 @@ class Comp_parameters():
         self.delta = 0
 
 
-def test_file_names():
-    """ 
-    test file name strings for saving results in subsequent steps of 
-    solving process
-    """
-
-    trains_input = Input_timetable()
-    trains_input.qubo1()
-    q_pars = Comp_parameters()
-
-    file = file_LP_output(trains_input, q_pars)
-    assert file == "solutions/LP_1_5.json"
-
-    file = file_QUBO(trains_input, q_pars)
-    assert file == "QUBOs/qubo_1_5_2.0_4.0.json"
-
-    file = file_QUBO_comp(trains_input, q_pars)
-    assert file ==  "solutions/qubo_1_5_2.0_4.0_sim_1000_0.001_500.json"
-
-    file = file_hist(trains_input, q_pars)
-    assert file == "histograms/qubo_1_5_2.0_4.0_sim_1000_0.001_500.json"
-
 
 def test_solving_process():
     """
@@ -96,11 +75,7 @@ def test_solving_process():
     q_pars = Comp_parameters()
 
     # LP solving
-    file = "tests/files/test_LP.json"
-    solve_on_LP(trains_input, q_pars, file)
-
-    with open(file, 'rb') as fp:
-        lp_sol = pickle.load(fp)
+    lp_sol = solve_on_LP(trains_input, q_pars, "")
 
 
     assert list(lp_sol["variables"].keys()) == ['t_PS_1', 't_MR_1', 't_CS_1', 't_MR_3', 't_CS_3', 'y_MR_1_3', 'y_CS_1_3']
@@ -115,11 +90,7 @@ def test_solving_process():
     assert lp_sol["variables"]['y_CS_1_3'].value == 0
 
 
-    file = "tests/files/test_QUBO.json"
-    prepare_qubo(trains_input, q_pars, file)
-
-    with open(file, 'rb') as fp:
-        dict_read = pickle.load(fp)
+    dict_read = prepare_qubo(trains_input, q_pars, "")
 
     qubo_to_analyze = Analyze_qubo(dict_read)
     assert  qubo_to_analyze.objective  == {(6, 6): 0.0, (7, 7): 0.2, (8, 8): 0.4, (9, 9): 0.6, (10, 10): 0.8, (11, 11): 1.0,
@@ -151,17 +122,13 @@ def test_solving_QUBO():
     q_pars = Comp_parameters()
 
     input_file = "tests/files/test_QUBO.json"
-    output_file = "tests/files/test_QUBO_output.json"
-
-    solve_qubo(q_pars, input_file, output_file)
-
     with open(input_file, 'rb') as fp:
         dict_read = pickle.load(fp)
 
-    qubo_to_analyze = Analyze_qubo(dict_read)
+    samplesets = solve_qubo1(q_pars, dict_read, "")
 
-    with open(output_file, 'rb') as fp:
-        samplesets = pickle.load(fp)
+
+    qubo_to_analyze = Analyze_qubo(dict_read)
 
     assert list(samplesets.keys()) == [0, 1]
 
@@ -179,9 +146,7 @@ def test_solving_QUBO():
     sols = get_solutions_from_dmode(samplesets, q_pars)
     assert len(sols) == 1000
 
-    file = file = "tests/files/test_LP.json"
-    with open(file, 'rb') as fp:
-        lp_sol = pickle.load(fp)
+    lp_sol = solve_on_LP(trains_input, q_pars, "")
 
     sol = first_with_given_objective(sols, qubo_to_analyze, lp_sol["objective"])
     assert qubo_to_analyze.objective_val(sol) == objective
@@ -193,15 +158,14 @@ def test_qubo_analysis():
     trains_input.qubo1()
     q_pars = Comp_parameters()
 
-    qubo_file = "tests/files/test_QUBO.json"
-    lp_file = "tests/files/test_LP.json"
-    qubo_output_file = "tests/files/test_QUBO_output.json"
-    hist_file = "tests/files/test_hist.json"
+    dict_qubo = prepare_qubo(trains_input, q_pars, "")
 
-    analyze_qubo_Dwave(trains_input, q_pars, qubo_file, lp_file, qubo_output_file, hist_file)
+    lp_sol = solve_on_LP(trains_input, q_pars, "")
 
-    with open(hist_file, 'rb') as fp:
-        results = pickle.load(fp)
+    samplesets = solve_qubo1(q_pars, dict_qubo, "")
+
+    results = analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets)
+
 
     hist_obj = results["qubo objectives"]
     ground = results["lp objective"]
@@ -230,9 +194,9 @@ def test_qubo_analysis():
     test_list.sort(reverse=True)
     assert histogram_pass[12:17]==test_list  # decreasing histogram
 
-    hist_e = energies_histograms(hist_file)
-    hist_o = objective_histograms(hist_file)
-    hist_p = passing_time_histigrams(trains_input, q_pars, hist_file)
+    hist_e = energies_histograms1(results)
+    hist_o = objective_histograms1(results)
+    hist_p = passing_time_histigrams1(trains_input, q_pars, results)
 
     assert hist_e["ground_state"] == -20
     assert np.min(hist_e["feasible_value"]) == -20
@@ -262,45 +226,20 @@ def test_plotting():
     file_pass = hist_file.replace(".json", f"{trains_input.objective_stations[0]}_{trains_input.objective_stations[1]}.pdf")
     file_obj = hist_file.replace(".json", "obj.pdf")
 
-    plot_hist_pass_obj(trains_input, q_pars, hist_file, file_pass, file_obj)
-    display_prec_feasibility(trains_input, q_pars, hist_file)
+    dict_qubo = prepare_qubo(trains_input, q_pars, "")
 
 
+    lp_sol = solve_on_LP(trains_input, q_pars, "")
 
-def test_gates():
-    """ 
-    test auxiliary functions for quantum gates and 
-    analysis of quantum gate outputs 
-    """
-    trains_input = Input_timetable()
-    trains_input.qubo1()
-    q_pars = Comp_parameters()
-    q_pars.method = "IonQsim"
+    samplesets = solve_qubo1(q_pars, dict_qubo, "")
 
-    file = "tests/files/test_LP.json"
-    with open(file, 'rb') as fp:
-        lp_sol = pickle.load(fp)
+    results = analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets)
 
-    file = "tests/files/test_QUBO.json"
-    with open(file, 'rb') as fp:
-        dict_qubo = pickle.load(fp)
+    hist_pass = passing_time_histigrams1(trains_input, q_pars, results)
+    hist_obj = objective_histograms1(results)
 
-    Q = Analyze_qubo(dict_qubo)
-    qubo_solution = Q.int_vars2qubo(lp_sol["variables"])
-    all_solutions = Q.heuristics_degenerate(qubo_solution, "PS")
-    ret = analyze_QUBO_outputs(Q, trains_input.objective_stations, all_solutions, lp_sol, q_pars.softern_pass)
+    plot_hist_pass_obj1(trains_input, q_pars, hist_pass, hist_obj, file_pass, file_obj)
 
-    assert ret == {'perc feasible': 1.0, 'MR_CS': [12, 12], 'no qubits': 30,
-                   'no qubo terms': 306, 'lp objective': 0.0,
-                   'q ofset': 20.0, 'qubo objectives': [0.0],
-                   'energies feasible': [-Q.sum_ofset], 'energies notfeasible': []}
+    display_prec_feasibility1(trains_input, q_pars, results)
 
 
-    test_f = "tests/files/qubo_and_ground.json"
-    save_qubo_4gates_comp(dict_qubo, all_solutions, test_f)
-
-    with open(test_f, 'rb') as fp:
-        dict_read = pickle.load(fp)
-
-    assert dict_read["ground_solutions"] == all_solutions
-    assert dict_read["ground_energy"] == Q.energy(qubo_solution)

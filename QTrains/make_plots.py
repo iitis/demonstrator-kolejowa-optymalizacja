@@ -105,6 +105,26 @@ def energies_histograms(file_hist):
     return hist
 
 
+def energies_histograms1(results):
+    """ returns dict histogram of energies, feasible and not feasible"""
+
+    hist_feas = results["energies feasible"]
+    hist_notfeas = results["energies notfeasible"]
+    ground = results["lp objective"] - results["q ofset"]
+    # to exclude numerical errors 
+    hist_feas = list(np.around(np.array(hist_feas),5))
+    xs_f = list(set(hist_feas))
+    xs_f = np.sort(xs_f)
+    ys_f = [hist_feas.count(x) for x in xs_f]
+
+    xs_nf = list(set(hist_notfeas))
+    xs_nf = np.sort(xs_nf)
+    ys_nf = [hist_notfeas.count(x) for x in xs_nf]
+
+    hist = {"feasible_value":list(xs_f), "feasible_count":ys_f, "notfeasible_value":list(xs_nf), "notfeasible_count":ys_nf, "ground_state":ground}
+
+    return hist
+
 ##### plots
 
 def plot_title(trains_input, q_pars):

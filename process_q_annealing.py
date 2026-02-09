@@ -74,6 +74,10 @@ def process1(trains_input, q_pars):
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st, initial_tt=True)
     plot_train_diagrams(input_dict, file)
 
+    file =  "ILP_train_diagram.pdf"
+    input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
+    plot_train_diagrams(input_dict, file)
+
     solutions = get_solutions_from_dmode(samplesets, q_par)
     solution, _ = best_feasible_state(solutions, qubo_to_analyze)
     v = qubo_to_analyze.qubo2int_vars(solution)

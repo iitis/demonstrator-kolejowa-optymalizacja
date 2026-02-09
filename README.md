@@ -92,7 +92,6 @@ Files:
 
 3. ```solutions``` - stored solutions of railway problems, if for particular parameters setting computations have already been stored, new computation will not be performed and the particular file will not be overwritten
 4. ```QUBOs``` - qubos of railway problems
-5. ```QAOA Results``` - results of quantum gate computing via QAOA
 6. ```histograms``` - histograms from data analysis
 7. ```histograms_soft``` - histograms from data analysis with a soft check of minimal passing time constrain.
 

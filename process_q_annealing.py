@@ -233,7 +233,7 @@ if __name__ == "__main__":
             series_of_computation(our_qubo, q_par)
 
     #elif args.mode == 3:
-    if False:
+    elif False:
         q_par.solver = "Advantage_system4.1"
         no_qbits = count_no_qbits(our_qubo, q_par)
 
@@ -241,7 +241,7 @@ if __name__ == "__main__":
             pickle.dump(no_qbits, fp)
 
     #elif args.mode == 4:
-    if False:
+    elif False:
         q_pars = Comp_parameters()
         our_qubo = Input_timetable()
 
@@ -313,7 +313,7 @@ if __name__ == "__main__":
         with open('solutions/cplex_benchmarks.json', 'w') as json_file:
             json.dump(all_results, json_file, indent=4)
 
-    if False:
+    elif False:
     #if args.mode == 6:
         if not args.simulation:
             
@@ -372,7 +372,7 @@ if __name__ == "__main__":
             #json.dump(all_results, json_file, indent=4)
 
 
-    if False:
+    elif False:
     #else:
             q_par.method = "real"
             q_par.solver = "Advantage_system6.3"

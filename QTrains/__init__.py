@@ -6,7 +6,8 @@ from .make_qubo import (QuboVars, Analyze_qubo, add_update, find_ones, hist_pass
 from .make_qubo import (filter_feasible, first_with_given_objective, is_feasible, high_excited_state, best_feasible_state, worst_feasible_state)
 from .make_plots import (plot_train_diagrams, plot_hist_pass_obj, plot_title, _ax_hist_passing_times, _ax_objective)
 from .make_plots import passing_time_histigrams, objective_histograms, energies_histograms, train_path_data
+from .make_plots import passing_time_histigrams1, objective_histograms1, plot_hist_pass_obj1
 from .solve_sched_problems import (file_LP_output, file_QUBO, file_QUBO_comp, file_hist, classical_benchmark)
-from .solve_sched_problems import (solve_on_LP, prepare_qubo, solve_qubo, analyze_qubo_Dwave, get_solutions_from_dmode, approx_no_physical_qbits)
+from .solve_sched_problems import (solve_on_LP, prepare_qubo, solve_qubo, analyze_qubo_Dwave, analyze_qubo_Dwave1, get_solutions_from_dmode, approx_no_physical_qbits)
 from .solve_sched_problems import (analyze_QUBO_outputs, save_qubo_4gates_comp, analyze_chain_strength)
-from .solve_sched_problems import (display_prec_feasibility)
+from .solve_sched_problems import display_prec_feasibility , display_prec_feasibility1, solve_qubo1

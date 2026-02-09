@@ -89,8 +89,13 @@ def solve_on_LP(trains_input, q_pars, output_file):
     d["variables"] = v.variables
     d["objective"] = problem.compute_objective(v, rail_input)
 
-    with open(output_file, 'wb') as fp:
-        pickle.dump(d, fp)
+    if output_file == "":
+
+        return d
+    else:
+
+        with open(output_file, 'wb') as fp:
+            pickle.dump(d, fp)
 
 
 def classical_benchmark(trains_input, q_pars, results:dict):
@@ -172,8 +177,12 @@ def prepare_qubo(trains_input, q_pars, output_file):
     q.make_qubo(rail_input)
     qubo_dict = q.store_in_dict(rail_input)
 
-    with open(output_file, 'wb') as fp:
-        pickle.dump(qubo_dict, fp)
+    if output_file == "":
+        return qubo_dict
+
+    else:
+        with open(output_file, 'wb') as fp:
+            pickle.dump(qubo_dict, fp)
 
 
 def approx_no_physical_qbits(trains_input, q_pars):
@@ -229,11 +238,57 @@ def solve_qubo(q_pars, input_file, output_file):
                 num_reads=q_pars.num_reads,
                 annealing_time=q_pars.annealing_time
         )
-
-    with open(output_file, 'wb') as fp:
-        pickle.dump(sampleset, fp)
-
+            
     print(f"solved qubo method {q_pars.method}")
+
+    if output_file == "":
+
+        return sampleset
+    
+    else:
+        with open(output_file, 'wb') as fp:
+            pickle.dump(sampleset, fp)
+
+
+
+def solve_qubo1(q_pars, dict_read, output_file):
+    """ solve the problem given by QUBO and store results """
+
+
+    qubo_to_analyze = Analyze_qubo(dict_read)
+    Q = qubo_to_analyze.qubo
+
+    sampleset = {}
+    loops = q_pars.num_all_runs // q_pars.num_reads
+    if q_pars.method == "sim":
+        for k in range(loops):
+            s = neal.SimulatedAnnealingSampler()
+            sampleset[k] = s.sample_qubo(
+                Q, beta_range = q_pars.beta_range, num_sweeps = q_pars.num_sweeps,
+                num_reads = q_pars.num_reads, beta_schedule_type="geometric"
+            )
+
+    elif q_pars.method == "real":
+        sampler = EmbeddingComposite(DWaveSampler(solver=q_pars.solver, token=q_pars.token))
+
+        for k in range(loops):
+
+            sampleset[k] = sampler.sample_qubo(
+                Q,
+                num_reads=q_pars.num_reads,
+                annealing_time=q_pars.annealing_time
+        )
+            
+    print(f"solved qubo method {q_pars.method}")
+
+    if output_file == "":
+
+        return sampleset
+    
+    else:
+        with open(output_file, 'wb') as fp:
+            pickle.dump(sampleset, fp)
+
 
 
 
@@ -254,6 +309,21 @@ def get_solutions_from_dmode(samplesets, q_pars):
 
     return solutions
 
+
+def analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets):
+    """ analyze results of computation on QUBO and comparison with LP """
+
+
+
+    qubo_to_analyze = Analyze_qubo(dict_qubo)
+
+    stations = trains_input.objective_stations
+
+    our_solutions = get_solutions_from_dmode(samplesets, q_pars)
+
+    results = analyze_QUBO_outputs(qubo_to_analyze, stations, our_solutions, lp_sol, softernpass = q_pars.softern_pass)
+
+    return results
 
 
 
@@ -397,6 +467,27 @@ def display_prec_feasibility(trains_input, q_pars, file_h):
 
 
     print("xxxxxxxxx    RESULTS     xxxxxx ", trains_input.file,  "xxxxx")
+    print("delays", trains_input.delays )
+    print("method", q_pars.method)
+    print("psum", q_pars.psum)
+    print("ppair", q_pars.ppair)
+    print("dmax", q_pars.dmax)
+    print("LP objective", res_dict["lp objective"])
+    print("qubo ofset", res_dict["q ofset"])
+
+    if q_pars.method == "real":
+        print("annealing time", q_pars.annealing_time)
+    print("no qubits", res_dict["no qubits"])
+    print("no qubo terms", res_dict["no qubo terms"])
+    print("percentage of feasible", res_dict["perc feasible"])
+
+
+
+def display_prec_feasibility1(trains_input, q_pars, res_dict):
+    """ print results of computation """
+
+
+    print("xxxxxxxxx    RESULTS     xxxxxx ", trains_input.notrains,  "trains xxxxx")
     print("delays", trains_input.delays )
     print("method", q_pars.method)
     print("psum", q_pars.psum)

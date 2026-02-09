@@ -46,6 +46,41 @@ def objective_histograms(file_hist):
     return hist
 
 
+def passing_time_histigrams1(trains_input, q_pars, results):
+    """ returs dict histogram of passing times between staitons in trains_input (objectvive stations) """
+
+
+    hist_pass = results[f"{trains_input.objective_stations[0]}_{trains_input.objective_stations[1]}"]
+
+    if hist_pass == []:
+        hist = {"value":[], "count":[], "stations":trains_input.objective_stations, "no_trains":trains_input.notrains, "dmax":q_pars.dmax,
+             "softern":q_pars.softern_pass}
+        return hist
+
+    xs = list( range(np.max(hist_pass) + 1) )
+    ys = [hist_pass.count(x) for x in xs]
+
+    hist = {"value":xs, "count":ys, "stations":trains_input.objective_stations, "no_trains":trains_input.notrains, "dmax":q_pars.dmax,
+             "softern":q_pars.softern_pass}
+
+    return hist
+
+
+def objective_histograms1(results):
+    """ returns dict histogram of objectives"""
+
+    hist_obj = results["qubo objectives"]
+    ground = results["lp objective"]
+
+    xs = list(set(hist_obj))
+    xs = np.sort(xs)
+    ys = [hist_obj.count(x) for x in xs]
+
+    hist = {"value":list(xs), "count":ys, "ground_state":ground}
+
+    return hist
+
+
 def energies_histograms(file_hist):
     """ returns dict histogram of energies, feasible and not feasible"""
 
@@ -138,6 +173,28 @@ def plot_hist_pass_obj(trains_input, q_pars, file_hist, file_pass, file_obj):
     fig, ax = plt.subplots(figsize=(4, 3))
     hist = objective_histograms(file_hist)
     _ax_objective(ax, hist)
+    our_title= f"{plot_title(trains_input, q_pars)}, dmax={int(q_pars.dmax)}"
+    fig.subplots_adjust(bottom=0.2, left = 0.15)
+    plt.title(our_title)
+    plt.savefig(file_obj)
+    plt.clf()
+
+
+def plot_hist_pass_obj1(trains_input, q_pars, hist_pass, hist_obj, file_pass, file_obj):
+    """ plotting of DWave results """
+
+    fig, ax = plt.subplots(figsize=(4, 3))
+
+    _ax_hist_passing_times(ax, hist_pass)
+    our_title = plot_title(trains_input, q_pars)
+    fig.subplots_adjust(bottom=0.2, left = 0.15)
+    plt.title(our_title)
+    plt.savefig(file_pass)
+    plt.clf()
+
+
+    fig, ax = plt.subplots(figsize=(4, 3))
+    _ax_objective(ax, hist_obj)
     our_title= f"{plot_title(trains_input, q_pars)}, dmax={int(q_pars.dmax)}"
     fig.subplots_adjust(bottom=0.2, left = 0.15)
     plt.title(our_title)

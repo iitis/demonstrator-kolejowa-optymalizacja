@@ -96,34 +96,26 @@ Files:
 
 
 
-#### Quantum annealing 
+#### Solving trains problem 
 
 In ```process_q_annealing.py ``` trains scheduling problems are solved via Integer Linear Programming and quantum (or simulated) annealing
 
 Arguments:
 
-- --mode MODE: process mode: 0: prepare only QUBO, 1: make, computation (ILP and annealing), 2: analyze outputs, 3: count q-bits, 4: prepare Ising model 5: CPLEX benchmark  - by default: ```2```
-- --simulation SIMULATION: if True solve/analyze output of simulated annealing (via DWave software), if False real annealing - by default: False
+- --mode MODE: 1: make, computation (ILP and annealing), 5: CPLEX benchmark 
 - --softern_pass SOFTERN_PASS: if true analyze output without feasibility check on a minimal passing time constrain - by default: False
 
 
 Example usage:
 
-```python3 process_q_annealing.py --mode 1 --sim True```
-
-Solve the series of problems by simulated annealing (does not perform calculations already performed and saved).
-
 ```python3 process_q_annealing.py --mode 1```
 
-Solve the series of problems by real D-Wave annealing (does not perform calculations already performed and saved).
+Solve the series of problems by simulated annealing and ILP.
 
-```python3 process_q_annealing.py --mode 2 --softern_pass True```
+```python3 process_q_annealing.py --mode 5```
 
+CPLEX benchmarking.
 
-
-#### Preparing plots for the article
-
-Script ```plots4article.py``` creates .csv files for high-quality plots for article, and saves them in the ```article_plots``` folder.
 
 
 # Funding

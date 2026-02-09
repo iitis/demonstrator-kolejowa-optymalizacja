@@ -10,7 +10,7 @@ from QTrains import file_QUBO_comp, file_QUBO, file_LP_output
 from QTrains import Analyze_qubo
 from trains_timetable import Input_timetable, Comp_parameters
 
-from process_q_gates import get_files_dirs
+#from process_q_gates import get_files_dirs
 
 
 

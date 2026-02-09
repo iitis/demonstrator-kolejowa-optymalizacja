@@ -9,5 +9,5 @@ from .make_plots import passing_time_histigrams, objective_histograms, energies_
 from .make_plots import passing_time_histigrams1, objective_histograms1, energies_histograms1, plot_hist_pass_obj1
 from .solve_sched_problems import (file_LP_output, file_QUBO, file_QUBO_comp, file_hist, classical_benchmark)
 from .solve_sched_problems import (solve_on_LP, prepare_qubo, solve_qubo, analyze_qubo_Dwave, analyze_qubo_Dwave1, get_solutions_from_dmode, approx_no_physical_qbits)
-from .solve_sched_problems import (analyze_QUBO_outputs, save_qubo_4gates_comp, analyze_chain_strength)
+from .solve_sched_problems import (analyze_QUBO_outputs, analyze_chain_strength)
 from .solve_sched_problems import display_prec_feasibility , display_prec_feasibility1, solve_qubo1

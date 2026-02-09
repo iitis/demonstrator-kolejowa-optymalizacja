@@ -354,7 +354,6 @@ def analyze_qubo_Dwave(trains_input, q_pars, qubo_file, lp_file, qubo_output_fil
 
 def analyze_QUBO_outputs(qubo, stations, our_solutions, lp_solution, softernpass = False):
     """  returns histogram of passing times between selected stations and objective 
-         outputs of gate computer
     """
     hist = list([])
     qubo_objectives = list([])
@@ -417,29 +416,11 @@ def analyze_chain_strength(qubo_output_file):
 
 
 
-######## gates  #######
-
-
-def save_qubo_4gates_comp(dict_qubo, ground_sols, output_file):
-    "creates and seves file with ground oslution and small qubo for gate computing"
-    our_qubo = Analyze_qubo(dict_qubo)
-    qubo4gates = {}
-    qubo4gates["qubo"] = dict_qubo["qubo"]
-    qubo4gates["ground_solutions"] = ground_sols
-    E = our_qubo.energy(ground_sols[0])
-    for ground_sol in ground_sols:
-        assert E == our_qubo.energy(ground_sol)
-    qubo4gates["ground_energy"] = E
-
-    with open(output_file, 'wb') as fp_w:
-        pickle.dump(qubo4gates, fp_w)
-
-
 ##### results presentation
 
 
 def dsiplay_solution_analysis(trains_input, our_solution, lp_solution, timetable = False):
-    "prints features of the solution fram gate computer"
+    "prints features of the solution "
     print( "..........  QUBO ........   " )
     print("qubo size=", len( trains_input.qubo ), " number of Q-bits=", len( our_solution ))
     print("energy=", trains_input.energy( our_solution ))

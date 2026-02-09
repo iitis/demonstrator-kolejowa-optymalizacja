@@ -206,7 +206,7 @@ class Comp_parameters():
         # for real annealing
         self.annealing_time = 1000
         self.solver = "Advantage_system6.3"
-        self.token = ""
+        #self.token = ""
         assert self.annealing_time * self.num_reads < 1_000_000
 
         self.compute = False

@@ -232,15 +232,16 @@ if __name__ == "__main__":
             q_par.psum = 40.0
             series_of_computation(our_qubo, q_par)
 
-    elif args.mode == 3:
+    #elif args.mode == 3:
+    if False:
         q_par.solver = "Advantage_system4.1"
         no_qbits = count_no_qbits(our_qubo, q_par)
 
         with open("solutions/embedding.json", 'wb') as fp:
             pickle.dump(no_qbits, fp)
 
-    elif args.mode == 4:
-
+    #elif args.mode == 4:
+    if False:
         q_pars = Comp_parameters()
         our_qubo = Input_timetable()
 
@@ -312,8 +313,8 @@ if __name__ == "__main__":
         with open('solutions/cplex_benchmarks.json', 'w') as json_file:
             json.dump(all_results, json_file, indent=4)
 
-    
-    if args.mode == 6:
+    if False:
+    #if args.mode == 6:
         if not args.simulation:
             
 
@@ -371,19 +372,22 @@ if __name__ == "__main__":
             #json.dump(all_results, json_file, indent=4)
 
 
+    if False:
+    #else:
+            q_par.method = "real"
+            q_par.solver = "Advantage_system6.3"
+            for d_max in [2,6]:
+                q_par.dmax = d_max
+                for q_par.annealing_time in [10, 1000]:
 
+                    q_par.ppair = 2.0
+                    q_par.psum = 4.0
+                    series_of_computation(our_qubo, q_par)
+
+                    q_par.ppair = 20.0
+                    q_par.psum = 40.0
+                    series_of_computation(our_qubo, q_par)
+    
     else:
-        q_par.method = "real"
-        q_par.solver = "Advantage_system6.3"
-        for d_max in [2,6]:
-            q_par.dmax = d_max
-            for q_par.annealing_time in [10, 1000]:
-
-                q_par.ppair = 2.0
-                q_par.psum = 4.0
-                series_of_computation(our_qubo, q_par)
-
-                q_par.ppair = 20.0
-                q_par.psum = 40.0
-                series_of_computation(our_qubo, q_par)
+        print(0)
     

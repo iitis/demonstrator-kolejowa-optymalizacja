@@ -219,7 +219,8 @@ def solve_qubo(q_pars, input_file, output_file):
                 num_reads = q_pars.num_reads, beta_schedule_type="geometric"
             )
 
-    elif q_pars.method == "real":
+    elif False:
+    #q_pars.method == "real":
         sampler = EmbeddingComposite(DWaveSampler(solver=q_pars.solver, token=q_pars.token))
 
         for k in range(loops):

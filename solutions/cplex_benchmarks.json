@@ -3,49 +3,49 @@
         "1": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.010287284851074219,
+            "Comp time [seconds]": 0.0020990371704101562,
             "Objective value": 0.0
         },
         "2": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001621246337890625,
+            "Comp time [seconds]": 0.00164794921875,
             "Objective value": 0.0
         },
         "4": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0014536380767822266,
+            "Comp time [seconds]": 0.0014920234680175781,
             "Objective value": 0.0
         },
         "6": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0014560222625732422,
+            "Comp time [seconds]": 0.0014986991882324219,
             "Objective value": 0.0
         },
         "8": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001493215560913086,
+            "Comp time [seconds]": 0.0014977455139160156,
             "Objective value": 0.0
         },
         "10": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.003548860549926758,
+            "Comp time [seconds]": 0.0016994476318359375,
             "Objective value": 0.0
         },
         "11": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0016472339630126953,
+            "Comp time [seconds]": 0.0016846656799316406,
             "Objective value": 0.0
         },
         "12": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0016455650329589844,
+            "Comp time [seconds]": 0.0016856193542480469,
             "Objective value": 0.0
         }
     },
@@ -53,49 +53,49 @@
         "1": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0014405250549316406,
+            "Comp time [seconds]": 0.0015180110931396484,
             "Objective value": 5.0
         },
         "2": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.00156402587890625,
+            "Comp time [seconds]": 0.0016312599182128906,
             "Objective value": 6.0
         },
         "4": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001542806625366211,
+            "Comp time [seconds]": 0.001603841781616211,
             "Objective value": 14.0
         },
         "6": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0016803741455078125,
+            "Comp time [seconds]": 0.0017588138580322266,
             "Objective value": 14.0
         },
         "8": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001741170883178711,
+            "Comp time [seconds]": 0.001733541488647461,
             "Objective value": 16.0
         },
         "10": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0017294883728027344,
+            "Comp time [seconds]": 0.001811981201171875,
             "Objective value": 18.0
         },
         "11": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0017421245574951172,
+            "Comp time [seconds]": 0.0018067359924316406,
             "Objective value": 18.0
         },
         "12": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0017397403717041016,
+            "Comp time [seconds]": 0.0018219947814941406,
             "Objective value": 18.0
         }
     },
@@ -103,49 +103,49 @@
         "1": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0014438629150390625,
+            "Comp time [seconds]": 0.0015189647674560547,
             "Objective value": 0.0
         },
         "2": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0014476776123046875,
+            "Comp time [seconds]": 0.0015316009521484375,
             "Objective value": 0.0
         },
         "4": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001474618911743164,
+            "Comp time [seconds]": 0.0015234947204589844,
             "Objective value": 0.0
         },
         "6": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0015821456909179688,
+            "Comp time [seconds]": 0.001651763916015625,
             "Objective value": 0.0
         },
         "8": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001584768295288086,
+            "Comp time [seconds]": 0.0016345977783203125,
             "Objective value": 0.0
         },
         "10": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0059697628021240234,
+            "Comp time [seconds]": 0.002210855484008789,
             "Objective value": 0.0
         },
         "11": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0021123886108398438,
+            "Comp time [seconds]": 0.002236604690551758,
             "Objective value": 0.0
         },
         "12": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0021119117736816406,
+            "Comp time [seconds]": 0.0021505355834960938,
             "Objective value": 0.0
         }
     },
@@ -153,49 +153,49 @@
         "1": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0014338493347167969,
+            "Comp time [seconds]": 0.0014925003051757812,
             "Objective value": 1.666666666666666
         },
         "2": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.001554727554321289,
+            "Comp time [seconds]": 0.0016200542449951172,
             "Objective value": 2.0
         },
         "4": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.022527456283569336,
+            "Comp time [seconds]": 0.014072656631469727,
             "Objective value": 4.666666666666657
         },
         "6": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.006756305694580078,
+            "Comp time [seconds]": 0.0579371452331543,
             "Objective value": 4.666666666666657
         },
         "8": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.0067861080169677734,
+            "Comp time [seconds]": 0.006930351257324219,
             "Objective value": 5.333333333333343
         },
         "10": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.010038137435913086,
+            "Comp time [seconds]": 0.010298013687133789,
             "Objective value": 6.0
         },
         "11": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.009952783584594727,
+            "Comp time [seconds]": 0.010234832763671875,
             "Objective value": 6.0
         },
         "12": {
             "model engine": "cplex_local",
             "CPLEX Python API version": "22.1.1.0",
-            "Comp time [seconds]": 0.009928464889526367,
+            "Comp time [seconds]": 0.011040925979614258,
             "Objective value": 6.0
         }
     }

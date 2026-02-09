@@ -122,28 +122,6 @@ Solve the series of problems by real D-Wave annealing (does not perform calculat
 
 
 
-#### Quantum gate computing
-
-Script ```process_q_gates.py``` saves QUBO and the ground state as well as analyses output dedicated to gates computing.
-
-Arguments:
-
-- --notrains NOTRAINS  number of trains, 1,2,4 are supported, by default: ``2``
-- --savequbo SAVEQUBO  if True prepare qubo else to analyze outputs, by default: False
-- --nolayers NOLAYERS  number of layers of QAOA in analyzed data, by default: ```1```
-- --datafile DATAFILE  file with data, by default:  ```"QAOA Results/IonQ Simulations/"```
-
-
-Example usage:
-
-```python3 process_q_gates.py --notrains 2 --nolayer 1 --datafile "QAOA Results/IonQ Simulations/" ```
-
-Analyzes ```2``` trains results in ```"QAOA Results/IonQ Simulations/" ``` where ```2``` layers of QAOA was used
-
-```python3 process_q_gates.py --notrains 2 --savequbo true ```
-
-Prepared QUBOs for ```2``` trains problems and save them in ```QUBOs/gates/2trains/```
-
 #### Preparing plots for the article
 
 Script ```plots4article.py``` creates .csv files for high-quality plots for article, and saves them in the ```article_plots``` folder.

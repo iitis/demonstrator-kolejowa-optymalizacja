@@ -2,7 +2,7 @@
 
 ---
 
-````markdown
+
 ## Konfiguracja środowiska (Linux)
 
 Projekt wykorzystuje izolowane środowisko Pythona, aby zapewnić
@@ -66,11 +66,6 @@ Wystarczy ponownie aktywować środowisko:
 source .venv/bin/activate
 ```
 
-```
-```
-
-
-Oto tłumaczenie na polski:
 
 ---
 

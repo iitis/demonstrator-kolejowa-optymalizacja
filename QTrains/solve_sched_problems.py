@@ -217,17 +217,13 @@ def display_prec_feasibility1(trains_input, q_pars, res_dict):
     """ print results of computation """
 
 
-    print("xxxxxxxxx    RESULTS     xxxxxx ", trains_input.notrains,  "trains xxxxx")
-    print("delays", trains_input.delays )
-    print("method", q_pars.method)
-    print("psum", q_pars.psum)
-    print("ppair", q_pars.ppair)
-    print("dmax", q_pars.dmax)
-    print("LP objective", res_dict["lp objective"])
-    print("qubo ofset", res_dict["q ofset"])
+    print("xxxxxxxxx    Wyniki     xxxxxx ", trains_input.notrains,  "pociągów xxxxx")
+    print()
 
-    if q_pars.method == "real":
-        print("annealing time", q_pars.annealing_time)
-    print("no qubits", res_dict["no qubits"])
-    print("no qubo terms", res_dict["no qubo terms"])
-    print("percentage of feasible", res_dict["perc feasible"])
+    print(" ------ podejście klasyczne  --------")
+    print("Optymalna funkcja celu", res_dict["lp objective"])
+    print()
+
+    print("----- symulowane wyżarzanie  ----")
+    print("ilość kubitów", res_dict["no qubits"])
+    print("procent wykonalnych rozwiązań", res_dict["perc feasible"])

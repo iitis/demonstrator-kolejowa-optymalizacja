@@ -203,10 +203,10 @@ def test_qubo_analyze_specific():
 
     qubo_dict = q.store_in_dict(rail_input)
 
-    with open('tests/files/qubo.json', 'wb') as fp:
+    with open('tests/files/qubo.pkl', 'wb') as fp:
         pickle.dump(qubo_dict, fp)
 
-    with open('tests/files/qubo.json', 'rb') as fp:
+    with open('tests/files/qubo.pkl', 'rb') as fp:
         dict_read = pickle.load(fp)
 
     assert qubo_dict == dict_read

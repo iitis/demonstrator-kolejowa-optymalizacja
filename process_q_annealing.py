@@ -106,7 +106,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--mode",
         type=int,
-        help="process 1: make computation (ILP and simulated annealing),  5: CPLEX benchmark",
+        help="process 1: make computation (ILP and simulated annealing)",
         default=1,
     )
 
@@ -144,52 +144,5 @@ if __name__ == "__main__":
         our_qubo = Input_timetable()
 
 
-    if args.mode == 5:
-
-        q_par = Comp_parameters()
-        trains_input = Input_timetable()
-        all_results = {}
-
-
-        for d_max in [2, 6]:
-            q_par.dmax = d_max
-
-            
-            delays_list = [{}, {1:5, 2:2, 4:5}]
-            for delays in delays_list:
-
-                results = {}
-
-                trains_input.qubo_real_1t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                trains_input.qubo_real_2t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                trains_input.qubo_real_4t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-
-                trains_input.qubo_real_6t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                trains_input.qubo_real_8t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                trains_input.qubo_real_10t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                trains_input.qubo_real_11t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                trains_input.qubo_real_12t(delays)
-                classical_benchmark(trains_input, q_par, results)
-
-                if len(delays) == 0:
-                    all_results[f"no_delays_dmax{d_max}"] = results
-                else:
-                    all_results[f"delays_dmax{d_max}"] = results
-                
-            print(all_results)
 
     

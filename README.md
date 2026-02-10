@@ -94,9 +94,7 @@ source .venv/bin/activate
 
 ---
 
-# quantum-stochastic-optimization-railways
-
-Zastosowanie obliczeń kwantowych do optymalizacji stochastycznej na przykładzie sieci kolejowej / tramwajowej w Baltimore.
+# Zastosowanie obliczeń kwantowych do optymalizacji stochastycznej na przykładzie sieci kolejowej / tramwajowej w Baltimore.
 
 Pliki:
 

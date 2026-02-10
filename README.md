@@ -110,7 +110,7 @@ Pliki:
 
 ---
 
-#### Rozwiązywanie problemu pociągów
+## Rozwiązywanie problemu pociągów
 
 W `computation.py` problemy harmonogramowania pociągów są rozwiązywane za pomocą programowania liniowego całkowitoliczbowego (ILP) oraz kwantowego (symulowanego) wyżarzania.
 

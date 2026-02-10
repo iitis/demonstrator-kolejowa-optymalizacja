@@ -205,8 +205,8 @@ def test_qubo_analysis():
     assert sum(hist_p["count"]) == 2*sum(hist_o["count"])
 
     # plotting auxiliary
-    plot_tit = plot_title(trains_input, q_pars)
-    assert plot_tit == "Not disturbed, sim, ppair=2, psum=4"
+    plot_tit = plot_title(2)
+    assert plot_tit == "symulowane wyżarzanie 2 pociągi"
     _, ax = plt.subplots(figsize=(4, 3))
     _ax_objective(ax, hist_o)
     _ax_hist_passing_times(ax, hist_p)

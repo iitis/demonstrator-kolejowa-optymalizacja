@@ -113,9 +113,7 @@ Rozwiązuje serię problemów przy użyciu symulowanego wyżarzania oraz ILP.
 
 
 
+# Finansowanie
 
-
-
-# Funding
-
-Scientific work co-financed from the state budget under the program of the Minister of Education and Science, Poland (pl. Polska) under the name "Science for Society II" project number NdS-II/SP/0336/2024/01 funding amount ```1000000``` PLN total value of the project ```1000000``` PLN 
+Materiał dofinansowana ze środków budżetu państwa w ramach programu Ministra Edukacji i Nauki pod nazwą
+„Nauka dla Społeczeństwa II”: nr projektu NdSII/SP/0336/2024/01, kwota dofinansowania ```1 000 000``` PLN, całkowita wartość projektu ```1 000 000``` PLN

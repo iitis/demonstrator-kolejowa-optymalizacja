@@ -86,7 +86,7 @@ Files:
 
 #### Solving trains problem 
 
-In ```process_q_annealing.py ``` trains scheduling problems are solved via Integer Linear Programming and quantum (or simulated) annealing
+In ```computation.py ``` trains scheduling problems are solved via Integer Linear Programming and quantum (or simulated) annealing
 
 Arguments:
 
@@ -96,13 +96,11 @@ Arguments:
 
 Example usage:
 
-```python3 process_q_annealing.py --mode 1```
+```python3 computation.py --mode 1```
 
 Solve the series of problems by simulated annealing and ILP.
 
-```python3 process_q_annealing.py --mode 5```
 
-CPLEX benchmarking.
 
 
 

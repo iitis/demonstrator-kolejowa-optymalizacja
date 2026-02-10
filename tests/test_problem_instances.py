@@ -16,7 +16,7 @@ def test_1train_qubo():
 
     file_input = "tests/files/1train_QUBO.json"
 
-    compare_qubo = prepare_qubo(trains_input, q_par, "")
+    compare_qubo = prepare_qubo(trains_input, q_par)
 
     with open(file_input, 'rb') as fp:
         created_qubo = pickle.load(fp)
@@ -38,7 +38,7 @@ def test_2train_qubo():
 
     q_par.dmax = 2
 
-    compare_qubo = prepare_qubo(trains_input, q_par, "")
+    compare_qubo = prepare_qubo(trains_input, q_par)
 
     with open(file_input, 'rb') as fp:
         created_qubo = pickle.load(fp)
@@ -60,7 +60,7 @@ def test_4train_qubo():
 
     file_input = "tests/files/4train_QUBO.json"
 
-    compare_qubo = prepare_qubo(trains_input, q_par, "")
+    compare_qubo = prepare_qubo(trains_input, q_par)
 
     with open(file_input, 'rb') as fp:
         created_qubo = pickle.load(fp)

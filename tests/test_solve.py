@@ -74,7 +74,7 @@ def test_solving_process():
     q_pars = Comp_parameters()
 
     # LP solving
-    lp_sol = solve_on_LP(trains_input, q_pars, "")
+    lp_sol = solve_on_LP(trains_input, q_pars)
 
 
     assert list(lp_sol["variables"].keys()) == ['t_PS_1', 't_MR_1', 't_CS_1', 't_MR_3', 't_CS_3', 'y_MR_1_3', 'y_CS_1_3']
@@ -89,7 +89,7 @@ def test_solving_process():
     assert lp_sol["variables"]['y_CS_1_3'].value == 0
 
 
-    dict_read = prepare_qubo(trains_input, q_pars, "")
+    dict_read = prepare_qubo(trains_input, q_pars)
 
     qubo_to_analyze = Analyze_qubo(dict_read)
     assert  qubo_to_analyze.objective  == {(6, 6): 0.0, (7, 7): 0.2, (8, 8): 0.4, (9, 9): 0.6, (10, 10): 0.8, (11, 11): 1.0,
@@ -124,7 +124,7 @@ def test_solving_QUBO():
     with open(input_file, 'rb') as fp:
         dict_read = pickle.load(fp)
 
-    samplesets = solve_qubo1(q_pars, dict_read, "")
+    samplesets = solve_qubo1(q_pars, dict_read)
 
 
     qubo_to_analyze = Analyze_qubo(dict_read)
@@ -145,7 +145,7 @@ def test_solving_QUBO():
     sols = get_solutions_from_dmode(samplesets, q_pars)
     assert len(sols) == 1000
 
-    lp_sol = solve_on_LP(trains_input, q_pars, "")
+    lp_sol = solve_on_LP(trains_input, q_pars)
 
     sol = first_with_given_objective(sols, qubo_to_analyze, lp_sol["objective"])
     assert qubo_to_analyze.objective_val(sol) == objective
@@ -157,11 +157,11 @@ def test_qubo_analysis():
     trains_input.qubo1()
     q_pars = Comp_parameters()
 
-    dict_qubo = prepare_qubo(trains_input, q_pars, "")
+    dict_qubo = prepare_qubo(trains_input, q_pars)
 
-    lp_sol = solve_on_LP(trains_input, q_pars, "")
+    lp_sol = solve_on_LP(trains_input, q_pars)
 
-    samplesets = solve_qubo1(q_pars, dict_qubo, "")
+    samplesets = solve_qubo1(q_pars, dict_qubo)
 
     results = analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets)
 
@@ -225,12 +225,11 @@ def test_plotting():
     file_pass = hist_file.replace(".json", f"{trains_input.objective_stations[0]}_{trains_input.objective_stations[1]}.pdf")
     file_obj = hist_file.replace(".json", "obj.pdf")
 
-    dict_qubo = prepare_qubo(trains_input, q_pars, "")
+    dict_qubo = prepare_qubo(trains_input, q_pars)
 
+    lp_sol = solve_on_LP(trains_input, q_pars)
 
-    lp_sol = solve_on_LP(trains_input, q_pars, "")
-
-    samplesets = solve_qubo1(q_pars, dict_qubo, "")
+    samplesets = solve_qubo1(q_pars, dict_qubo)
 
     results = analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets)
 

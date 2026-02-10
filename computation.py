@@ -19,12 +19,12 @@ from trains_timetable import Input_timetable, Comp_parameters
 def process1(trains_input, q_pars):
     """ the sequence of calculation  makes computation if results has not been saved already"""
 
-    dict_qubo = prepare_qubo(trains_input, q_pars, "")
+    dict_qubo = prepare_qubo(trains_input, q_pars)
 
 
-    lp_sol = solve_on_LP(trains_input, q_pars, "")
+    lp_sol = solve_on_LP(trains_input, q_pars)
 
-    samplesets = solve_qubo1(q_pars, dict_qubo, "")
+    samplesets = solve_qubo1(q_pars, dict_qubo)
 
     results = analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets)
 

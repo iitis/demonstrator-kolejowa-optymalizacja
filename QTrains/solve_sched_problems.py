@@ -17,7 +17,7 @@ from .make_qubo import (QuboVars, Analyze_qubo, update_hist, is_feasible)
 
 
 #### ILP solver
-def solve_on_LP(trains_input, q_pars, output_file):
+def solve_on_LP(trains_input, q_pars):
     """ solve the problem using LP, and save results """
     stay = trains_input.stay
     headways = trains_input.headways
@@ -50,7 +50,7 @@ def solve_on_LP(trains_input, q_pars, output_file):
 
 
 #####  QUBO handling ######
-def prepare_qubo(trains_input, q_pars, output_file):
+def prepare_qubo(trains_input, q_pars):
     """ create and save QUBO given railway input and parameters 
     
     """
@@ -78,7 +78,7 @@ def prepare_qubo(trains_input, q_pars, output_file):
 
 
 
-def solve_qubo1(q_pars, dict_read, output_file):
+def solve_qubo1(q_pars, dict_read):
     """ solve the problem given by QUBO and store results """
 
 

@@ -394,6 +394,7 @@ def update_hist(qubo, sol_q, stations, hist, softern_pass_t = False):
 
     if softern_pass_t - passing time constrain is not considered
     """
+
     if is_feasible(sol_q, qubo, softern_pass_t):
 
         vq = qubo.qubo2int_vars(sol_q)
@@ -411,6 +412,7 @@ def is_feasible(solution, qubo, softern_pass_t = False):
     
     if softern_pass_t - passing time constrain is not considered
     """
+    print(softern_pass_t)
     if softern_pass_t:
         c_sum, c_headway, _, c_circ = qubo.count_broken_constrains(solution) # c_pass not counted for
         return c_sum == 0 and c_headway == 0 and c_circ == 0 and qubo.broken_MO_conditions(solution) == 0

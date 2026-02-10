@@ -70,35 +70,47 @@ source .venv/bin/activate
 ```
 
 
+Oto tłumaczenie na polski:
+
+---
+
 # quantum-stochastic-optimization-railways
-Application of quantum computation for stochastic optimization on the example of railway/tramway network in Baltimore.
 
-Files:
+Zastosowanie obliczeń kwantowych do optymalizacji stochastycznej na przykładzie sieci kolejowej / tramwajowej w Baltimore.
 
-1. ```QTrains``` - source code
-2. ```tests``` - testing source code
+Pliki:
 
-3. ```solutions``` - stored solutions of railway problems, if for particular parameters setting computations have already been stored, new computation will not be performed and the particular file will not be overwritten
-4. ```QUBOs``` - qubos of railway problems
-5. ```histograms``` - histograms from data analysis
+1. `QTrains` – kod źródłowy
 
+2. `tests` – kod testowy
 
+3. `solutions` – zapisane rozwiązania problemów kolejowych; jeśli dla określonych parametrów obliczenia zostały już wykonane i zapisane, nowe obliczenia nie będą uruchamiane, a plik nie zostanie nadpisany
 
-#### Solving trains problem 
+4. `QUBOs` – formulacje QUBO dla problemów kolejowych
 
-In ```computation.py ``` trains scheduling problems are solved via Integer Linear Programming and quantum (or simulated) annealing
+5. `histograms` – histogramy z analizy danych
 
-Arguments:
+---
 
-- --mode MODE: 1: make, computation (ILP and annealing), 5: CPLEX benchmark 
-- --softern_pass SOFTERN_PASS: if true analyze output without feasibility check on a minimal passing time constrain - by default: False
+#### Rozwiązywanie problemu pociągów
 
+W `computation.py` problemy harmonogramowania pociągów są rozwiązywane za pomocą programowania liniowego całkowitoliczbowego (ILP) oraz kwantowego (symulowanego) wyżarzania.
 
-Example usage:
+Argumenty:
 
-```python3 computation.py --mode 1```
+* `--notrains` – liczba pociągów w problemie harmonogramowania
+* `--softern_pass` – jeśli `True`, analizuje wynik bez sprawdzania spełnienia minimalnego ograniczenia czasu przejazdu; domyślnie: `False`
 
-Solve the series of problems by simulated annealing and ILP.
+Przykład użycia:
+
+```bash
+python3 computation.py --notrains 2
+```
+
+Rozwiązuje serię problemów przy użyciu symulowanego wyżarzania oraz ILP.
+
+---
+
 
 
 

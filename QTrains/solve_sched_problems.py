@@ -134,7 +134,6 @@ def analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets):
     """ analyze results of computation on QUBO and comparison with LP """
 
 
-
     qubo_to_analyze = Analyze_qubo(dict_qubo)
 
     stations = trains_input.objective_stations
@@ -148,7 +147,7 @@ def analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets):
 
 
 
-def analyze_QUBO_outputs(qubo, stations, our_solutions, lp_solution, softernpass = False):
+def analyze_QUBO_outputs(qubo, stations, our_solutions, lp_solution, softernpass):
     """  returns histogram of passing times between selected stations and objective 
     """
     hist = list([])

@@ -202,4 +202,4 @@ class Comp_parameters():
         self.method = "sim"
         # for simulated annelaing
         self.beta_range = (0.001, 50)
-        self.num_sweeps = 500
+        self.num_sweeps = 300

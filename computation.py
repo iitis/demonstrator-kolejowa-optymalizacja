@@ -16,10 +16,12 @@ from trains_timetable import Input_timetable, Comp_parameters
 
 
 
-def process1(trains_input, q_pars):
+def process(trains_input, q_pars):
     """ the sequence of calculation  makes computation if results has not been saved already"""
 
     dict_qubo = prepare_qubo(trains_input, q_pars)
+
+    print(q_pars.softern_pass)
 
 
     lp_sol = solve_on_LP(trains_input, q_pars)
@@ -38,6 +40,10 @@ def process1(trains_input, q_pars):
     plot_hist_pass_obj1(trains_input, q_pars, hist_pass, hist_obj, file_pass, file_obj)
 
     display_prec_feasibility1(trains_input, q_pars, results)
+
+    print(q_pars.softern_pass)
+
+    print("xxxxxxxxxxxxxxxxxxxxxx")
 
     v = lp_sol["variables"]
     exclude_st = ""
@@ -69,6 +75,10 @@ def process1(trains_input, q_pars):
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
     plot_train_diagrams(input_dict, file)
 
+    
+
+    
+
 
 
 
@@ -78,10 +88,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser("mode of problem solving: computation /  output analysis")
 
     parser.add_argument(
-        "--mode",
+        "--notrains",
         type=int,
-        help="process 1: make computation (ILP and simulated annealing)",
-        default=1,
+        help="ilość pociągów w problemie harmonogramowania",
+        default=2,
     )
 
     parser.add_argument(
@@ -98,24 +108,36 @@ if __name__ == "__main__":
     q_par = Comp_parameters()
     q_par.softern_pass = args.softern_pass
 
-    q_par.compute = False  # make computations / optimisation
-    q_par.analyze = False  # Analyze results
+    assert args.notrains in [1,2,4,6,8,10,11,12]
 
-    assert args.mode in [0,1,2,3,4,5,6]
-    if args.mode == 1:
+    our_qubo = Input_timetable()
+    delays = {1:5, 2:2, 4:5}
 
-        our_qubo = Input_timetable()
-
-        delays = {1:5, 2:2, 4:5}
-
-
+    if args.notrains == 1:
+        our_qubo.qubo_real_1t(delays)
+    elif args.notrains == 2:
+        our_qubo.qubo_real_2t(delays)
+    elif args.notrains == 4:
         our_qubo.qubo_real_4t(delays)
-        q_par.dmax = 6
-        q_par.ppair = 2.0
-        q_par.psum = 4.0
-        process1(our_qubo, q_par)
+    elif args.notrains == 6:
+        our_qubo.qubo_real_6t(delays)
+    elif args.notrains == 8:
+        our_qubo.qubo_real_8t(delays)
+    elif args.notrains == 10:
+        our_qubo.qubo_real_10t(delays)
+    elif args.notrains == 11:
+        our_qubo.qubo_real_11t(delays)
+    elif args.notrains == 12:
+        our_qubo.qubo_real_12t(delays)
 
-        our_qubo = Input_timetable()
+
+    q_par.dmax = 6
+    q_par.ppair = 2.0
+    q_par.psum = 4.0
+
+    process(our_qubo, q_par)
+
+
 
 
 

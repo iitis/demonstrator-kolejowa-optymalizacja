@@ -99,7 +99,7 @@ W `computation.py` problemy harmonogramowania pociągów są rozwiązywane za po
 Argumenty:
 
 * `--notrains` – liczba pociągów w problemie harmonogramowania
-* `--softern_pass` – jeśli `True`, analizuje wynik bez sprawdzania spełnienia minimalnego ograniczenia czasu przejazdu; domyślnie: `False`
+
 
 Przykład użycia:
 

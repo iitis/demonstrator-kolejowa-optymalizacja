@@ -21,9 +21,6 @@ def process(trains_input, q_pars):
 
     dict_qubo = prepare_qubo(trains_input, q_pars)
 
-    print(q_pars.softern_pass)
-
-
     lp_sol = solve_on_LP(trains_input, q_pars)
 
     samplesets = solve_qubo1(q_pars, dict_qubo)
@@ -41,9 +38,6 @@ def process(trains_input, q_pars):
 
     display_prec_feasibility1(trains_input, q_pars, results)
 
-    print(q_pars.softern_pass)
-
-    print("xxxxxxxxxxxxxxxxxxxxxx")
 
     v = lp_sol["variables"]
     exclude_st = ""
@@ -77,10 +71,6 @@ def process(trains_input, q_pars):
 
     
 
-    
-
-
-
 
 if __name__ == "__main__":
 
@@ -94,19 +84,9 @@ if __name__ == "__main__":
         default=2,
     )
 
-    parser.add_argument(
-        "--softern_pass",
-        type=bool,
-        help="if true analyze output without feasibility check on minimal passing time constrain",
-        default=False,
-    )
-
-
     args = parser.parse_args()
 
-
     q_par = Comp_parameters()
-    q_par.softern_pass = args.softern_pass
 
     assert args.notrains in [1,2,4,6,8,10,11,12]
 

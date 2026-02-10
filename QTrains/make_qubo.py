@@ -384,7 +384,7 @@ def hist_passing_times(sol, stations, qubo):
     return list(time_differences)
 
 
-def update_hist(qubo, sol_q, stations, hist, softern_pass_t = False):
+def update_hist(qubo, sol_q, stations, hist, softern_pass_t):
     """ 
     update histogram of passing times between stations:
     - qubo - sol_q
@@ -407,19 +407,18 @@ def update_hist(qubo, sol_q, stations, hist, softern_pass_t = False):
 
 #######   functions foltering series of solutions #######
 
-def is_feasible(solution, qubo, softern_pass_t = False):
+def is_feasible(solution, qubo, softern_pass_t):
     """ checks if solution is feasible
     
     if softern_pass_t - passing time constrain is not considered
     """
-    print(softern_pass_t)
     if softern_pass_t:
         c_sum, c_headway, _, c_circ = qubo.count_broken_constrains(solution) # c_pass not counted for
         return c_sum == 0 and c_headway == 0 and c_circ == 0 and qubo.broken_MO_conditions(solution) == 0
     return qubo.count_broken_constrains(solution) == (0,0,0,0) and qubo.broken_MO_conditions(solution) == 0
 
 
-def filter_feasible(solutions, qubo, softern_pass_t = False):
+def filter_feasible(solutions, qubo, softern_pass_t):
     """ returns best solution from the sample """
     new_solutions = []
     for solution in solutions:
@@ -429,7 +428,7 @@ def filter_feasible(solutions, qubo, softern_pass_t = False):
 
 
 
-def first_with_given_objective(solutions, qubo, given_objective, softern_pass_t = False):
+def first_with_given_objective(solutions, qubo, given_objective, softern_pass_t):
     """ returns first with given objective (e.g. from ground) from the series os solutions """
     for solution in solutions:
         if is_feasible(solution, qubo, softern_pass_t):
@@ -441,7 +440,7 @@ def first_with_given_objective(solutions, qubo, given_objective, softern_pass_t 
 def high_excited_state(solutions, qubo, stations, increased_pt):
     """ returns the highly excited tat with at least 1 increased_pt between two stations  """
     for solution in solutions:
-        if is_feasible(solution, qubo):
+        if is_feasible(solution, qubo, False):
             vq = qubo.qubo2int_vars(solution)
             h = hist_passing_times(vq, stations, qubo)
             if increased_pt in h:
@@ -453,7 +452,7 @@ def best_feasible_state(solutions, qubo):
     current_best_objective = np.inf
     current_best_state = []
     for solution in solutions:
-        if is_feasible(solution, qubo):
+        if is_feasible(solution, qubo, False):
             objective = qubo.objective_val(solution)
             if objective < current_best_objective:
                 current_best_objective = objective
@@ -466,7 +465,7 @@ def worst_feasible_state(solutions, qubo):
     current_worst_objective = -np.inf
     current_worst_state = []
     for solution in solutions:
-        if is_feasible(solution, qubo):
+        if is_feasible(solution, qubo, False):
             objective = qubo.objective_val(solution)
             if objective > current_worst_objective:
                 current_worst_objective = objective

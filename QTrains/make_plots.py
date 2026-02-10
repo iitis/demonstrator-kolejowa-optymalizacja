@@ -189,7 +189,7 @@ def train_path_data(v, p, exclude_st = "", initial_tt = False):
     return {"space": xs, "time":ys, "stations_loc": stations_loc}
 
 
-def plot_train_diagrams(input_dict, file):
+def plot_train_diagrams(input_dict, file, title = ""):
     "plotter of train diagrams"
 
     xs = input_dict["space"]
@@ -197,14 +197,15 @@ def plot_train_diagrams(input_dict, file):
     stations_loc = input_dict["stations_loc"]
 
     for j in ys.keys():
-        plt.plot(ys[j], xs[j], "o-", label=f"train {j} ", linewidth=0.85, markersize=2)
-        plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.45), ncol = 3)
+        plt.plot(ys[j], xs[j], "o-", label=f"p. {j} ", linewidth=0.85, markersize=2)
+        plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.63), ncol = 4)
 
     our_marks = [f"{key}" for key in stations_loc]
     locs = list(stations_loc.values())
+    plt.title(f"wykres ruchu {title}")
     plt.yticks(locs, our_marks)
-    plt.xlabel("time")
-    plt.ylabel("stations")
-    plt.subplots_adjust(bottom=0.19, top = 0.75)
+    plt.xlabel("minuty")
+    plt.ylabel("stacja")
+    plt.subplots_adjust(bottom=0.19, top = 0.70)
     plt.savefig(file)
     plt.clf()

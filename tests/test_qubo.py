@@ -68,7 +68,7 @@ def test_qubo_analyze():
     #           0,1,2,3,4,5,6,7,8,9,10,11
     solution = [1,0,0,1,0,0,1,0,0,0,0,1]
     solutions.append(solution)
-    assert is_feasible(solution, qubo_to_analyze)
+    assert is_feasible(solution, qubo_to_analyze, softern_pass_t = False)
 
     v = qubo_to_analyze.qubo2int_vars(solution)
     assert qubo_to_analyze.binary_vars2sjt(solution) == {('A',1): 0, ('A',3): 2, ('B',1): 2, ('B',3): 6}
@@ -149,7 +149,7 @@ def test_qubo_analyze_more():
 
     #     0,1,2,3,4,5,6,7,8,9,10,11
     solution = [0,1,0,0,1,0,1,0,0,1,0,0]
-    assert not is_feasible(solution, qubo_to_analyze)
+    assert not is_feasible(solution, qubo_to_analyze, softern_pass_t = False)
     assert qubo_to_analyze.binary_vars2sjt(solution) == {('A',1): 1, ('A',3): 3, ('B',1): 2, ('B',3): 4}
     assert qubo_to_analyze.count_broken_constrains(solution) == (0, 0, 2, 0)
     assert qubo_to_analyze.broken_MO_conditions(solution) == 0
@@ -177,16 +177,16 @@ def test_qubo_analyze_filtering():
                 [0,1,0,0,1,0,1,0,0,1,0,0]
                 ]
 
-    assert filter_feasible(solutions, qubo_to_analyze) == [[1,0,0,1,0,0,1,0,0,0,0,1]]
+    assert filter_feasible(solutions, qubo_to_analyze, softern_pass_t = False) == [[1,0,0,1,0,0,1,0,0,0,0,1]]
     assert filter_feasible(solutions, qubo_to_analyze, softern_pass_t = True) == [[1,0,0,1,0,0,1,0,0,0,0,1], [0,1,0,0,1,0,1,0,0,1,0,0]]
 
     ###  filtering test series of feasible states
 
     solutions = [[1,0,1,0,0,0,1,0,0,0,0,1], [1,0,0,1,0,0,1,0,0,1,0,0], [1,0,0,1,0,0,1,0,0,0,1,0], [1,0,0,1,0,0,1,0,0,0,0,1]]
 
-    assert filter_feasible(solutions, qubo_to_analyze)  == [[1,0,0,1,0,0,1,0,0,1,0,0], [1,0,0,1,0,0,1,0,0,0,1,0], [1,0,0,1,0,0,1,0,0,0,0,1]]
+    assert filter_feasible(solutions, qubo_to_analyze, softern_pass_t = False)  == [[1,0,0,1,0,0,1,0,0,1,0,0], [1,0,0,1,0,0,1,0,0,0,1,0], [1,0,0,1,0,0,1,0,0,0,0,1]]
     assert high_excited_state(solutions, qubo_to_analyze, ["A", "B"], 3) == ([1,0,0,1,0,0,1,0,0,0,0,1], 1)
-    assert first_with_given_objective(solutions, qubo_to_analyze, 1) == [1,0,0,1,0,0,1,0,0,0,0,1]
+    assert first_with_given_objective(solutions, qubo_to_analyze, 1, softern_pass_t = False) == [1,0,0,1,0,0,1,0,0,0,0,1]
     assert best_feasible_state(solutions, qubo_to_analyze) == ([1,0,0,1,0,0,1,0,0,1,0,0], 0)
     assert worst_feasible_state(solutions, qubo_to_analyze) == ([1,0,0,1,0,0,1,0,0,0,0,1], 1)
 
@@ -355,10 +355,10 @@ def test_qubo_vs_LP():
     assert hist == [1.0, 3.0]
 
     hist_list = list([])
-    update_hist(qubo_to_analyze, solution, ["A", "B"], hist_list)
+    update_hist(qubo_to_analyze, solution, ["A", "B"], hist_list, softern_pass_t = False)
 
     assert hist_list == [1.0, 3.0]
-    assert bool(is_feasible(solution, qubo_to_analyze))
+    assert bool(is_feasible(solution, qubo_to_analyze, softern_pass_t = False))
 
     hist_list = list([])
     update_hist(qubo_to_analyze, solution, ["A", "B"], hist_list, softern_pass_t = True)
@@ -436,11 +436,11 @@ def test_qubo_vs_LP_advanced():
     assert vq['t_B_1'].value == 3
     assert vq['t_B_3'].value == 5
 
-    update_hist(qubo_to_analyze, solution, ["A", "B"], hist_list)
+    update_hist(qubo_to_analyze, solution, ["A", "B"], hist_list, softern_pass_t = False)
 
     assert hist_list == [2.0, 2.0]
     assert qubo_to_analyze.objective_val(solution) == 1.0
-    assert bool(is_feasible(solution, qubo_to_analyze))
+    assert bool(is_feasible(solution, qubo_to_analyze, softern_pass_t = False))
 
 
 

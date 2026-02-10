@@ -203,3 +203,4 @@ class Comp_parameters():
         # for simulated annelaing
         self.beta_range = (0.001, 50)
         self.num_sweeps = 300
+        self.softern_pass = False

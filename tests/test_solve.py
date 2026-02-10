@@ -147,7 +147,7 @@ def test_solving_QUBO():
 
     lp_sol = solve_on_LP(trains_input, q_pars)
 
-    sol = first_with_given_objective(sols, qubo_to_analyze, lp_sol["objective"])
+    sol = first_with_given_objective(sols, qubo_to_analyze, lp_sol["objective"], softern_pass_t = False)
     assert qubo_to_analyze.objective_val(sol) == objective
 
 

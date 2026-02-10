@@ -1,7 +1,7 @@
 """ prepare inputs and analyze outputs from quantum annelaing """
 
 import argparse
-
+from pathlib import Path
 
 
 from QTrains import solve_on_LP, prepare_qubo, analyze_qubo_Dwave1
@@ -14,10 +14,9 @@ from trains_timetable import Input_timetable, Comp_parameters
 
 
 
-
-
-def process(trains_input, q_pars):
+def process(trains_input, q_pars, folder = "rysunki"):
     """ the sequence of calculation  makes computation if results has not been saved already"""
+    
 
     dict_qubo = prepare_qubo(trains_input, q_pars)
 
@@ -28,8 +27,8 @@ def process(trains_input, q_pars):
     results = analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets)
 
 
-    file_pass = f"{trains_input.objective_stations[0]}_{trains_input.objective_stations[1]}.pdf"
-    file_obj = "obj.pdf"
+    file_pass = file = Path(folder) / f"czas_przejazdu_{trains_input.objective_stations[0]}<=>{trains_input.objective_stations[1]}.pdf"
+    file_obj =  file = Path(folder) /"funkcja_celu.pdf"
 
     hist_pass = passing_time_histigrams1(trains_input, q_pars, results)
     hist_obj = objective_histograms1(results)
@@ -44,30 +43,32 @@ def process(trains_input, q_pars):
 
     qubo_to_analyze = Analyze_qubo(dict_qubo)
 
-    file =  "Conflicted_train_diagram.pdf"
-    input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st, initial_tt=True)
-    plot_train_diagrams(input_dict, file)
+    
 
-    file =  "ILP_train_diagram.pdf"
+    file = Path(folder) / "Wykres_ruchu_początkowy.pdf"
+    input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st, initial_tt=True)
+    plot_train_diagrams(input_dict, file, " problem początkowy")
+
+    file = Path(folder) / "Wykres_ruchu_kalsyczne.pdf"
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
-    plot_train_diagrams(input_dict, file)
+    plot_train_diagrams(input_dict, file, " rozwiązanie klasyczne")
 
     solutions = get_solutions_from_dmode(samplesets, q_par)
     solution, _ = best_feasible_state(solutions, qubo_to_analyze)
     v = qubo_to_analyze.qubo2int_vars(solution)
 
-    file =  "best_solution_train_diagram.pdf"
+    file = Path(folder) / "Wykres_ruchu_sym_wyżarzenie1.pdf"
         
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
-    plot_train_diagrams(input_dict, file)
+    plot_train_diagrams(input_dict, file, " sym. wyżarzanie 1")
 
     solution, _ = high_excited_state(solutions, qubo_to_analyze, trains_input.objective_stations, increased_pt=16)
     v = qubo_to_analyze.qubo2int_vars(solution)
 
-    file =  "excited_solution_train_diagram.pdf"
+    file =  file = Path(folder) / "Wykres_ruchu_sym_wyżarzenie2.pdf"
         
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
-    plot_train_diagrams(input_dict, file)
+    plot_train_diagrams(input_dict, file, " sym. wyżarzanie 2")
 
     
 

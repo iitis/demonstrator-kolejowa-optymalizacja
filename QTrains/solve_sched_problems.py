@@ -6,8 +6,6 @@ from dwave.system import (
     EmbeddingComposite,
     DWaveSampler
 )
-from dwave.system.composites import FixedEmbeddingComposite
-from minorminer import find_embedding
 
 
 from .parameters import (Parameters, Railway_input)

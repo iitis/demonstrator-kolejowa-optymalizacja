@@ -64,16 +64,17 @@ def energies_histograms1(results):
 
 ##### plots
 
-def plot_title(trains_input, q_pars):
+def plot_title(no_trains):
     """ title for plot of passing times """
-    if trains_input.delays == {}:
-        disturbed = "Not disturbed"
+
+    if no_trains == 1:
+        poc = " 1 pociąg"
+    elif no_trains in [2,3,4]:
+        poc = f" {no_trains} pociągi"
     else:
-        disturbed = "Disturbed"
-    if q_pars.method == "real":
-        tit = f"{disturbed}, at={q_pars.annealing_time} mili seconds, ppair={round(q_pars.ppair)}, psum={round(q_pars.psum)}"
-    else:
-        tit = f"{disturbed}, {q_pars.method}, ppair={round(q_pars.ppair)}, psum={round(q_pars.psum)}"
+        poc = f" {no_trains} pociągów"
+
+    tit = "symulowane wyżarzanie" + poc
     return tit
 
 
@@ -85,13 +86,13 @@ def _ax_hist_passing_times(ax, hist, add_text = True):
     ax.bar(xs,ys)
 
     stations = hist["stations"]
-    ax.set_xlabel(f"Passing times {stations}")
-    ax.set_ylabel("counts")
+    ax.set_xlabel(f"Czas przejazdu {stations}")
+    ax.set_ylabel("ilość rozwiązań")
     if add_text:
         k = np.max(ys)/12
-        no_trains = hist["no_trains"]
-        dmax = int(hist["dmax"])
-        ax.text(1,k, f"{no_trains} trains, dmax={dmax}", fontsize=10)
+        #no_trains = hist["no_trains"]
+        #dmax = int(hist["dmax"])
+        #ax.text(1,k, f"{no_trains} trains, dmax={dmax}", fontsize=10)
 
     ax.set_xlim(left=0)
     xx = [i for i in xs if i % 2 == 0]
@@ -105,12 +106,12 @@ def _ax_objective(ax, hist):
     ys = hist["count"]
     ground = hist["ground_state"]
 
-    ax.bar(list(xs),ys, width = 0.3, color = "gray", label = "QUBO")
-    ax.axvline(x = ground, lw = 2, color = 'red', linestyle = 'dashed', label = 'ground state')
+    ax.bar(list(xs),ys, width = 0.3, color = "gray", label = "sym.")
+    ax.axvline(x = ground, lw = 2, color = 'red', linestyle = 'dashed', label = 'opt.')
 
     ax.legend()
-    ax.set_xlabel("Objective")
-    ax.set_ylabel("counts")
+    ax.set_xlabel("Funkcja celu - jakość rozwiązania")
+    ax.set_ylabel("częstotliwość")
 
 
 
@@ -120,7 +121,7 @@ def plot_hist_pass_obj1(trains_input, q_pars, hist_pass, hist_obj, file_pass, fi
     fig, ax = plt.subplots(figsize=(4, 3))
 
     _ax_hist_passing_times(ax, hist_pass)
-    our_title = plot_title(trains_input, q_pars)
+    our_title = plot_title(hist_pass["no_trains"])
     fig.subplots_adjust(bottom=0.2, left = 0.15)
     plt.title(our_title)
     plt.savefig(file_pass)
@@ -129,7 +130,7 @@ def plot_hist_pass_obj1(trains_input, q_pars, hist_pass, hist_obj, file_pass, fi
 
     fig, ax = plt.subplots(figsize=(4, 3))
     _ax_objective(ax, hist_obj)
-    our_title= f"{plot_title(trains_input, q_pars)}, dmax={int(q_pars.dmax)}"
+    our_title = plot_title(hist_pass["no_trains"])
     fig.subplots_adjust(bottom=0.2, left = 0.15)
     plt.title(our_title)
     plt.savefig(file_obj)

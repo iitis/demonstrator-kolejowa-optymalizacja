@@ -1,6 +1,16 @@
-# 
+# Komputery kwantowe w planowaniu transportu: studium przypadku Baltimore
 
----
+Nowoczesne komputery kwantowe, choć wciąż w fazie rozwoju i wrażliwe na szumy, otwierają zupełnie nowe możliwości w rozwiązywaniu bardzo trudnych problemów – takich, które dla klasycznych komputerów są niezwykle czasochłonne. W naszym badaniu pokazujemy, że te „szumy kwantowe” wcale nie są przeszkodą – mogą wręcz pomagać w znajdowaniu praktycznych rozwiązań.
+
+Przygotowaliśmy oprogramowanie, które pozwala na demonstracyjne testy problemów związanych z transportem publicznym. Do naszych eksperymentów wykorzystaliśmy symulator kwantowego wyżarzania firmy D-Wave, dzięki któremu mogliśmy generować i analizować różne scenariusze zarządzania ruchem pociągów w sytuacjach, gdy pojawiają się niespodziewane zakłócenia.
+
+Jako przykład wybraliśmy system Baltimore Light RailLink, który łączy cechy tramwajów i kolei miejskiej. Naszym celem było sprawdzenie, czy technologia kwantowa może pomóc w przewidywaniu i planowaniu ruchu w takich zmiennych warunkach, gdzie klasyczne metody mogą mieć ograniczenia.
+
+Nasze badania pokazują, że komputery kwantowe mogą stać się pomocnym narzędziem w planowaniu i optymalizacji transportu, a naturalny „szum kwantowy” może w praktyce wspierać procesy decyzyjne w złożonych, nieprzewidywalnych systemach.
+
+Na podstawie:
+Domino, K., E. Doucet, R. Robertson, B. Gardas, i S. Deffner, “On the Baltimore Light RailLink into the quantum future”, Scientific Reports, vol. 15, issue 29576
+10.1038/s41598-025-15545-0
 
 
 # Konfiguracja środowiska Python
@@ -94,7 +104,8 @@ source .venv/bin/activate
 
 ---
 
-# Zastosowanie obliczeń kwantowych do optymalizacji stochastycznej na przykładzie sieci kolejowej / tramwajowej w Baltimore.
+## Struktura plików
+
 
 Pliki:
 

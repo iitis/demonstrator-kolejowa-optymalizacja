@@ -20,25 +20,34 @@ python3 -m venv .venv
 # Windows (PowerShell lub CMD)
 python -m venv .venv
 ```
+---
 
 ### 2. Aktywacja środowiska
 
 ```bash
+# Linux / macOS
 source .venv/bin/activate
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# Windows CMD
+.\.venv\Scripts\activate.bat
+
 ```
 
-Po aktywacji w linii poleceń pojawi się prefiks:
-
-```
-(.venv)
-```
 
 ---
 
 ### 3. Aktualizacja pip
 
 ```bash
+# Linux / macOS
 pip install --upgrade pip
+
+# Windows
+pip install --upgrade pip
+
 ```
 
 ---
@@ -46,7 +55,12 @@ pip install --upgrade pip
 ### 4. Instalacja zależności
 
 ```bash
+# Linux / macOS
 pip install -r requirements.txt
+
+# Windows
+pip install -r requirements.txt
+
 ```
 
 ---
@@ -54,17 +68,27 @@ pip install -r requirements.txt
 ### 5. Dezaktywacja środowiska
 
 ```bash
+# Linux / macOS
 deactivate
+
+# Windows
+deactivate
+
 ```
 
 ---
 
 ### 6. Każde kolejne uruchomienie projektu
 
-Wystarczy ponownie aktywować środowisko:
-
 ```bash
+# Linux / macOS
 source .venv/bin/activate
+
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# Windows CMD
+.\.venv\Scripts\activate.bat
 ```
 
 

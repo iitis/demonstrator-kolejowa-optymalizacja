@@ -1,5 +1,6 @@
 """ tests trains timetable instances """
 import pickle
+import os
 from trains_timetable import Input_timetable, Comp_parameters
 from QTrains import prepare_qubo
 
@@ -14,7 +15,7 @@ def test_1train_qubo():
     delays = {}
     trains_input.qubo_real_1t(delays)
 
-    file_input = "tests/files/1train_QUBO.pkl"
+    file_input = os.path.join("tests", "files", "1train_QUBO.pkl")
 
     compare_qubo = prepare_qubo(trains_input, q_par)
 
@@ -34,7 +35,7 @@ def test_2train_qubo():
     delays = {}
     trains_input.qubo_real_2t(delays)
 
-    file_input = "tests/files/2train_QUBO.pkl"
+    file_input = os.path.join("tests", "files", "2train_QUBO.pkl")
 
     q_par.dmax = 2
 
@@ -58,7 +59,7 @@ def test_4train_qubo():
     delays = {}
     trains_input.qubo_real_4t(delays)
 
-    file_input = "tests/files/4train_QUBO.pkl"
+    file_input = os.path.join("tests", "files", "4train_QUBO.pkl")
 
     compare_qubo = prepare_qubo(trains_input, q_par)
 

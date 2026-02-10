@@ -1,6 +1,7 @@
 """ test creation and analysis of QUBO in qubo.py file """
 
 import pickle
+import os
 from scipy.optimize import linprog
 from QTrains import QuboVars, Parameters, Railway_input, Analyze_qubo, Variables, LinearPrograming
 from QTrains import add_update, find_ones, hist_passing_times, plot_train_diagrams, update_hist, train_path_data
@@ -203,10 +204,14 @@ def test_qubo_analyze_specific():
 
     qubo_dict = q.store_in_dict(rail_input)
 
-    with open('tests/files/qubo.pkl', 'wb') as fp:
+
+    # pełna ścieżka do pliku
+    qubo_path = os.path.join("tests", "files", "qubo.pkl")
+
+    with open(qubo_path, 'wb') as fp:
         pickle.dump(qubo_dict, fp)
 
-    with open('tests/files/qubo.pkl', 'rb') as fp:
+    with open(qubo_path, 'rb') as fp:
         dict_read = pickle.load(fp)
 
     assert qubo_dict == dict_read

@@ -2,6 +2,7 @@
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 from QTrains import Analyze_qubo
 from QTrains import solve_on_LP, prepare_qubo, solve_qubo1
@@ -120,7 +121,7 @@ def test_solving_QUBO():
     trains_input.qubo1()
     q_pars = Comp_parameters()
 
-    input_file = "tests/files/test_QUBO.pkl"
+    input_file = os.path.join("tests", "files", "test_QUBO.pkl")
     with open(input_file, 'rb') as fp:
         dict_read = pickle.load(fp)
 
@@ -220,7 +221,7 @@ def test_plotting():
     q_pars = Comp_parameters()
     q_pars.method = "sim"
 
-    hist_file = "tests/files/test_hist.pkl"
+    hist_file = os.path.join("tests", "files", "test_hist.pkl")
 
     file_pass = hist_file.replace(".pkl", f"{trains_input.objective_stations[0]}_{trains_input.objective_stations[1]}.pdf")
     file_obj = hist_file.replace(".pkl", "obj.pdf")

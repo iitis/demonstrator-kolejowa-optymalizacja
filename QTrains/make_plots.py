@@ -1,49 +1,9 @@
 """plots and auxiliary functions """
-import pickle
 import copy
 import matplotlib.pyplot as plt
 import numpy as np
 
 
-
-def passing_time_histigrams(trains_input, q_pars, file_hist):
-    """ returs dict histogram of passing times between staitons in trains_input (objectvive stations) """
-
-    with open(file_hist, 'rb') as fp:
-        results = pickle.load(fp)
-
-    hist_pass = results[f"{trains_input.objective_stations[0]}_{trains_input.objective_stations[1]}"]
-
-    if hist_pass == []:
-        hist = {"value":[], "count":[], "stations":trains_input.objective_stations, "no_trains":trains_input.notrains, "dmax":q_pars.dmax,
-             "softern":q_pars.softern_pass}
-        return hist
-
-    xs = list( range(np.max(hist_pass) + 1) )
-    ys = [hist_pass.count(x) for x in xs]
-
-    hist = {"value":xs, "count":ys, "stations":trains_input.objective_stations, "no_trains":trains_input.notrains, "dmax":q_pars.dmax,
-             "softern":q_pars.softern_pass}
-
-    return hist
-
-
-def objective_histograms(file_hist):
-    """ returns dict histogram of objectives"""
-
-    with open(file_hist, 'rb') as fp:
-        results = pickle.load(fp)
-
-    hist_obj = results["qubo objectives"]
-    ground = results["lp objective"]
-
-    xs = list(set(hist_obj))
-    xs = np.sort(xs)
-    ys = [hist_obj.count(x) for x in xs]
-
-    hist = {"value":list(xs), "count":ys, "ground_state":ground}
-
-    return hist
 
 
 def passing_time_histigrams1(trains_input, q_pars, results):
@@ -80,29 +40,6 @@ def objective_histograms1(results):
 
     return hist
 
-
-def energies_histograms(file_hist):
-    """ returns dict histogram of energies, feasible and not feasible"""
-
-    with open(file_hist, 'rb') as fp:
-        results = pickle.load(fp)
-
-    hist_feas = results["energies feasible"]
-    hist_notfeas = results["energies notfeasible"]
-    ground = results["lp objective"] - results["q ofset"]
-    # to exclude numerical errors 
-    hist_feas = list(np.around(np.array(hist_feas),5))
-    xs_f = list(set(hist_feas))
-    xs_f = np.sort(xs_f)
-    ys_f = [hist_feas.count(x) for x in xs_f]
-
-    xs_nf = list(set(hist_notfeas))
-    xs_nf = np.sort(xs_nf)
-    ys_nf = [hist_notfeas.count(x) for x in xs_nf]
-
-    hist = {"feasible_value":list(xs_f), "feasible_count":ys_f, "notfeasible_value":list(xs_nf), "notfeasible_count":ys_nf, "ground_state":ground}
-
-    return hist
 
 
 def energies_histograms1(results):
@@ -175,29 +112,6 @@ def _ax_objective(ax, hist):
     ax.set_xlabel("Objective")
     ax.set_ylabel("counts")
 
-
-def plot_hist_pass_obj(trains_input, q_pars, file_hist, file_pass, file_obj):
-    """ plotting of DWave results """
-
-    fig, ax = plt.subplots(figsize=(4, 3))
-
-    hist = passing_time_histigrams(trains_input, q_pars, file_hist)
-    _ax_hist_passing_times(ax, hist)
-    our_title = plot_title(trains_input, q_pars)
-    fig.subplots_adjust(bottom=0.2, left = 0.15)
-    plt.title(our_title)
-    plt.savefig(file_pass)
-    plt.clf()
-
-
-    fig, ax = plt.subplots(figsize=(4, 3))
-    hist = objective_histograms(file_hist)
-    _ax_objective(ax, hist)
-    our_title= f"{plot_title(trains_input, q_pars)}, dmax={int(q_pars.dmax)}"
-    fig.subplots_adjust(bottom=0.2, left = 0.15)
-    plt.title(our_title)
-    plt.savefig(file_obj)
-    plt.clf()
 
 
 def plot_hist_pass_obj1(trains_input, q_pars, hist_pass, hist_obj, file_pass, file_obj):

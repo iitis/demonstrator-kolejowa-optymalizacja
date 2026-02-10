@@ -1,13 +1,4 @@
 """ execution module for solving trains scheduling problem  """
-import pickle
-import itertools
-import time
-import pytest
-import numpy as np
-try:
-    import cplex
-except:
-    print("no CPLEX")
 
 from scipy.optimize import linprog
 import neal
@@ -20,46 +11,10 @@ from minorminer import find_embedding
 
 
 from .parameters import (Parameters, Railway_input)
-from .LP_problem import (Variables, LinearPrograming, make_ilp_docplex)
+from .LP_problem import (Variables, LinearPrograming)
 from .make_qubo import (QuboVars, Analyze_qubo, update_hist, is_feasible)
 
 
-####### make files names and directories, where each step of the solving scheme is saved
-def file_LP_output(trains_input, q_pars):
-    """ returns string, the file name and dir to store LP results """
-    file = trains_input.file
-    file = file.replace("qubo", "LP")
-    file = f"{file}_{q_pars.dmax}.json"
-
-    file = file.replace("QUBOs", "solutions")
-    return file
-
-def file_QUBO(trains_input, q_pars):
-    """ returns string, the file name and dir to store QUBO and its features """
-    return f"{trains_input.file}_{q_pars.dmax}_{q_pars.ppair}_{q_pars.psum}.json"
-
-
-def file_QUBO_comp(trains_input, q_pars):
-    """ returns string, the file name and dir to store results of computaiton on QUBO """
-    file = file_QUBO(trains_input, q_pars)
-    file = file.replace("QUBOs", "solutions")
-    if q_pars.method == "sim":
-        file = file.replace(".json", f"_{q_pars.method}_{q_pars.num_all_runs}_{q_pars.beta_range[0]}_{q_pars.num_sweeps}.json")
-    elif q_pars.method == "real":
-        file = file.replace(".json", f"_{q_pars.solver}_{q_pars.num_all_runs}_{q_pars.annealing_time}.json")
-
-    return file
-
-
-def file_hist(trains_input, q_pars):
-    """ file for histogram """
-    file = file_QUBO_comp(trains_input, q_pars)
-    if not q_pars.softern_pass:
-        file = file.replace("solutions", "histograms")
-    else:
-        file = file.replace("solutions", "histograms_soft")
-        file = file.replace("qubo", "qubo_softern")
-    return file
 
 #### ILP solver
 def solve_on_LP(trains_input, q_pars, output_file):
@@ -89,68 +44,9 @@ def solve_on_LP(trains_input, q_pars, output_file):
     d["variables"] = v.variables
     d["objective"] = problem.compute_objective(v, rail_input)
 
-    if output_file == "":
-
-        return d
-    else:
-
-        with open(output_file, 'wb') as fp:
-            pickle.dump(d, fp)
+    return d
 
 
-def classical_benchmark(trains_input, q_pars, results:dict):
-
-    """ solve the problem using LP, and save results """
-    stay = trains_input.stay
-    headways = trains_input.headways
-    preparation_t = trains_input.preparation_t
-
-    timetable = trains_input.timetable
-    objective_stations = trains_input.objective_stations
-    dmax = q_pars.dmax
-
-    pars = Parameters(timetable, stay=stay, headways=headways,
-                   preparation_t=preparation_t, dmax=dmax, circulation=trains_input.circ)
-    rail_input = Railway_input(pars, objective_stations, delays = trains_input.delays)
-    v = Variables(rail_input)
-    bounds, integrality = v.bonds_and_integrality()
-    problem = LinearPrograming(v, rail_input, M = q_pars.M)
-    model = make_ilp_docplex(problem, v)
-
-    start = time.time()
-    solution = model.solve()
-    end = time.time()
-
-
-    v.docplex2vars(model, solution)
-    v.check_clusters()
-
-    cplex_obj = problem.compute_objective(v, rail_input)
-
-
-    assert pytest.approx( solution.objective_value - problem.obj_ofset) == cplex_obj
-
-    results[trains_input.notrains] = {"model engine": model.get_engine().name, 
-                                      "CPLEX Python API version": cplex.__version__,
-                                      "Comp time [seconds]": end - start,
-                                      "Objective value":  cplex_obj
-                                      }
-
-    check = True
-
-    if check:
-
-        v = Variables(rail_input)
-        bounds, integrality = v.bonds_and_integrality()
-        problem = LinearPrograming(v, rail_input, M = q_pars.M)
-
-        opt = linprog(c=problem.obj, A_ub=problem.lhs_ineq,
-                    b_ub=problem.rhs_ineq, bounds=bounds, method='highs',
-                    integrality = integrality)
-        v.linprog2vars(opt)
-        v.check_clusters()
-
-        assert  cplex_obj == problem.compute_objective(v, rail_input) 
 
 
 #####  QUBO handling ######
@@ -177,77 +73,8 @@ def prepare_qubo(trains_input, q_pars, output_file):
     q.make_qubo(rail_input)
     qubo_dict = q.store_in_dict(rail_input)
 
-    if output_file == "":
-        return qubo_dict
 
-    else:
-        with open(output_file, 'wb') as fp:
-            pickle.dump(qubo_dict, fp)
-
-
-def approx_no_physical_qbits(trains_input, q_pars):
-    """ returns number of logical qbits and approximates number of physical qubits using embeder """
-    file = file_QUBO(trains_input, q_pars)
-    with open(file, 'rb') as fp:
-        dict_read = pickle.load(fp)
-
-    qubo_to_analyze = Analyze_qubo(dict_read)
-    Q = qubo_to_analyze.qubo
-
-    solver = DWaveSampler(solver=q_pars.solver)
-
-    __, target_edgelist, _ = solver.structure
-
-    emb = find_embedding(Q, target_edgelist, verbose=1)
-
-    no_logical = len(emb.keys())
-    physical_qbits_lists = list(emb.values())
-    physical_qbits_list = list(itertools.chain(*physical_qbits_lists))
-    no_physical =  len( set(physical_qbits_list) )
-
-    return no_logical, no_physical
-
-
-
-def solve_qubo(q_pars, input_file, output_file):
-    """ solve the problem given by QUBO and store results """
-
-    with open(input_file, 'rb') as fp:
-        dict_read = pickle.load(fp)
-
-    qubo_to_analyze = Analyze_qubo(dict_read)
-    Q = qubo_to_analyze.qubo
-
-    sampleset = {}
-    loops = q_pars.num_all_runs // q_pars.num_reads
-    if q_pars.method == "sim":
-        for k in range(loops):
-            s = neal.SimulatedAnnealingSampler()
-            sampleset[k] = s.sample_qubo(
-                Q, beta_range = q_pars.beta_range, num_sweeps = q_pars.num_sweeps,
-                num_reads = q_pars.num_reads, beta_schedule_type="geometric"
-            )
-
-    elif q_pars.method == "real":
-        sampler = EmbeddingComposite(DWaveSampler(solver=q_pars.solver, token=q_pars.token))
-
-        for k in range(loops):
-
-            sampleset[k] = sampler.sample_qubo(
-                Q,
-                num_reads=q_pars.num_reads,
-                annealing_time=q_pars.annealing_time
-        )
-            
-    print(f"solved qubo method {q_pars.method}")
-
-    if output_file == "":
-
-        return sampleset
-    
-    else:
-        with open(output_file, 'wb') as fp:
-            pickle.dump(sampleset, fp)
+    return qubo_dict
 
 
 
@@ -281,15 +108,8 @@ def solve_qubo1(q_pars, dict_read, output_file):
             
     print(f"solved qubo method {q_pars.method}")
 
-    if output_file == "":
-
-        return sampleset
+    return sampleset
     
-    else:
-        with open(output_file, 'wb') as fp:
-            pickle.dump(sampleset, fp)
-
-
 
 
 def get_solutions_from_dmode(samplesets, q_pars):
@@ -325,30 +145,6 @@ def analyze_qubo_Dwave1(trains_input, q_pars, dict_qubo, lp_sol, samplesets):
 
     return results
 
-
-
-def analyze_qubo_Dwave(trains_input, q_pars, qubo_file, lp_file, qubo_output_file, hist_file):
-    """ analyze results of computation on QUBO and comparison with LP """
-
-    with open(qubo_file, 'rb') as fp:
-        dict_qubo = pickle.load(fp)
-
-    qubo_to_analyze = Analyze_qubo(dict_qubo)
-
-    with open(lp_file, 'rb') as fp:
-        lp_sol = pickle.load(fp)
-
-    with open(qubo_output_file, 'rb') as fp:
-        samplesets = pickle.load(fp)
-
-    stations = trains_input.objective_stations
-
-    our_solutions = get_solutions_from_dmode(samplesets, q_pars)
-
-    results = analyze_QUBO_outputs(qubo_to_analyze, stations, our_solutions, lp_sol, softernpass = q_pars.softern_pass)
-
-    with open(hist_file, 'wb') as fp:
-        pickle.dump(results, fp)
 
 
 
@@ -395,27 +191,6 @@ def analyze_QUBO_outputs(qubo, stations, our_solutions, lp_solution, softernpass
 
 
 
-def analyze_chain_strength(qubo_output_file):
-    """ analyze results of computation on QUBO and comparison with LP """
-
-
-    with open(qubo_output_file, 'rb') as fp:
-        samplesets = pickle.load(fp)
-
-
-    solutions = []
-    broken_fraction = []
-    for sampleset in samplesets.values():
-        for (sol,energy, occ, chain_break_fraction) in sampleset.record:
-            for _ in range(occ):
-                solutions.append(sol)
-                broken_fraction.append(chain_break_fraction)
-
-    return broken_fraction
-
-
-
-
 ##### results presentation
 
 
@@ -438,29 +213,6 @@ def dsiplay_solution_analysis(trains_input, our_solution, lp_solution, timetable
         for k, v in vq.items():
             print(k, v.value, lp_solution["variables"][k].value)
         print("  ..............................  ")
-
-
-def display_prec_feasibility(trains_input, q_pars, file_h):
-    """ print results of computation """
-
-    with open(file_h, 'rb') as fp:
-        res_dict = pickle.load(fp)
-
-
-    print("xxxxxxxxx    RESULTS     xxxxxx ", trains_input.file,  "xxxxx")
-    print("delays", trains_input.delays )
-    print("method", q_pars.method)
-    print("psum", q_pars.psum)
-    print("ppair", q_pars.ppair)
-    print("dmax", q_pars.dmax)
-    print("LP objective", res_dict["lp objective"])
-    print("qubo ofset", res_dict["q ofset"])
-
-    if q_pars.method == "real":
-        print("annealing time", q_pars.annealing_time)
-    print("no qubits", res_dict["no qubits"])
-    print("no qubo terms", res_dict["no qubo terms"])
-    print("percentage of feasible", res_dict["perc feasible"])
 
 
 

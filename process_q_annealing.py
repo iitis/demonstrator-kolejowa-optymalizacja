@@ -1,44 +1,18 @@
 """ prepare inputs and analyze outputs from quantum annelaing """
-import pickle
-import os.path
+
 import argparse
-import json
-import numpy as np
 
 
-from dimod import utilities
 
-from QTrains import file_LP_output, file_QUBO, file_QUBO_comp, file_hist
-from QTrains import solve_on_LP, prepare_qubo, solve_qubo, analyze_qubo_Dwave, analyze_qubo_Dwave1, analyze_chain_strength
+from QTrains import solve_on_LP, prepare_qubo, analyze_qubo_Dwave1
 from QTrains import passing_time_histigrams1, objective_histograms1, plot_hist_pass_obj1, display_prec_feasibility1
-from QTrains import display_prec_feasibility, plot_hist_pass_obj, approx_no_physical_qbits, Analyze_qubo
-from QTrains import classical_benchmark, solve_qubo1, plot_train_diagrams
+from QTrains import Analyze_qubo
+from QTrains import solve_qubo1, plot_train_diagrams
+from QTrains import train_path_data, best_feasible_state, high_excited_state, get_solutions_from_dmode
 
 from trains_timetable import Input_timetable, Comp_parameters
 
-from plots4article import train_path_data, best_feasible_state, high_excited_state, get_solutions_from_dmode
 
-
-
-def prepare_Ising(trains_input, q_pars):
-    qubo_file = file_QUBO(trains_input, q_pars)
-
-    with open(qubo_file, 'rb') as fp:
-        dict_read = pickle.load(fp)
-
-    qubo_to_analyze = Analyze_qubo(dict_read)
-    Q = qubo_to_analyze.qubo
-
-    Ising = utilities.qubo_to_ising(Q, offset=0.0)
-    print("compute")
-
-    ising_file = qubo_file.replace("qubo_", "ising_").replace("QUBOs", "Ising").replace(".json", ".pkl")
-
-    if not os.path.isfile(ising_file):
-        print("save")
-
-        with open(ising_file, 'wb') as fp:
-            pickle.dump(Ising, fp)
 
 
 
@@ -132,10 +106,10 @@ if __name__ == "__main__":
 
         our_qubo = Input_timetable()
 
-        delays_list = [{}, {1:5, 2:2, 4:5}]
+        delays = {1:5, 2:2, 4:5}
 
 
-        our_qubo.qubo_real_4t(delays_list[1])
+        our_qubo.qubo_real_4t(delays)
         q_par.dmax = 6
         q_par.ppair = 2.0
         q_par.psum = 4.0

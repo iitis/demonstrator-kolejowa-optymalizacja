@@ -4,12 +4,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from QTrains import Analyze_qubo
-from QTrains import file_LP_output, file_QUBO, file_QUBO_comp, file_hist
-from QTrains import solve_on_LP, prepare_qubo, solve_qubo1, analyze_qubo_Dwave
-from QTrains import display_prec_feasibility1, plot_hist_pass_obj, analyze_qubo_Dwave1
-from QTrains import plot_title, _ax_hist_passing_times, _ax_objective, energies_histograms
+from QTrains import solve_on_LP, prepare_qubo, solve_qubo1
+from QTrains import display_prec_feasibility1, analyze_qubo_Dwave1
+from QTrains import plot_title, _ax_hist_passing_times, _ax_objective
 from QTrains import passing_time_histigrams1, objective_histograms1, energies_histograms1, plot_hist_pass_obj1
-from QTrains import analyze_QUBO_outputs, get_solutions_from_dmode, first_with_given_objective
+from QTrains import get_solutions_from_dmode, first_with_given_objective
 
 
 

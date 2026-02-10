@@ -1,5 +1,5 @@
 dwave-neal==0.6.0
-dimod==0.12.17
+dimod==0.12.20
 docplex==2.23.222
 dwave-system==1.30.0
 pylint==2.16.3

@@ -3,22 +3,23 @@
 ---
 
 
-## Konfiguracja środowiska (Linux)
+# Konfiguracja środowiska Python
 
-Projekt wykorzystuje izolowane środowisko Pythona, aby zapewnić
-powtarzalność wyników oraz zgodność wersji bibliotek.
+Projekt wykorzystuje izolowane środowisko Pythona, aby zapewnić powtarzalność wyników oraz zgodność wersji bibliotek.  
 
-Wszystkie polecenia należy wykonać w katalogu głównym repozytorium.
+Wszystkie polecenia należy wykonywać w katalogu głównym repozytorium.
 
 ---
 
-### 1. Utworzenie środowiska wirtualnego
+## 1. Utworzenie środowiska wirtualnego
 
 ```bash
+# Linux / macOS
 python3 -m venv .venv
-````
 
----
+# Windows (PowerShell lub CMD)
+python -m venv .venv
+```
 
 ### 2. Aktywacja środowiska
 
@@ -58,7 +59,7 @@ deactivate
 
 ---
 
-## Każde kolejne uruchomienie projektu
+### 6. Każde kolejne uruchomienie projektu
 
 Wystarczy ponownie aktywować środowisko:
 

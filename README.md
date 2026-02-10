@@ -50,19 +50,7 @@ pip install -r requirements.txt
 
 ---
 
-### 5. (Opcjonalnie, zalecane) instalacja projektu w trybie developerskim
-
-Jeśli projekt posiada `setup.py` lub `pyproject.toml`:
-
-```bash
-pip install -e .
-```
-
-Pozwala to na poprawne rozpoznawanie importów między modułami.
-
----
-
-### 6. Dezaktywacja środowiska
+### 5. Dezaktywacja środowiska
 
 ```bash
 deactivate

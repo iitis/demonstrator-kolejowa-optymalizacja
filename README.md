@@ -159,7 +159,8 @@ Wykresy ruchu kolejno (od lewej ) problem początkowy, rozwiązanie optymalne i 
 <img src="pics/Wykres_ruchu_sym_wyżarzenie1.jpg" width="190">
 <img src="pics/Wykres_ruchu_sym_wyżarzenie2.jpg" width="190">
 </p>
----
+
+gdzie p. znaczą numery pociągów.
 
 
 

@@ -146,10 +146,16 @@ Argumenty:
 Przykład użycia:
 
 ```bash
-python3 computation.py --notrains 2
+python3 computation.py --notrains 6
 ```
 
-Rozwiązuje serię problemów przy użyciu symulowanego wyżarzania oraz ILP.
+Wyniki (wykresy ruchy) zostaną wyświetlone na ekranie, a wszystkie wyniki będą znajdować się w pliku `graficzne_wyniki`:
+
+Wykresy ruchu kolejno problem początkowy, rozwiązanie optymalne i dwa różne rozwiązania symulowanego wyżarzania
+
+<img src="pics/Wykres_ruchu_początkowy.pdf" width="100">
+
+
 
 ---
 

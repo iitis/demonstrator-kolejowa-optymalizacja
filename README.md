@@ -105,10 +105,10 @@ source .venv/bin/activate
 
 ---
 
-## Struktura plików
+## Struktura projektu
 
 
-Pliki:
+Foldery:
 
 1. `QTrains` – kod źródłowy
 
@@ -118,6 +118,12 @@ Pliki:
 
 4. `graficzne_wyniki` – wyniki obliczeń w formie diagramów i wykresów
 
+
+Pliki:
+
+1. `computation.py` - plik główny uruchamiany do obliczeń
+
+2. `trains_timetable.py` - plik pomocniczy zawierający aktualne studia przypadku
 
 ---
 

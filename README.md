@@ -151,12 +151,14 @@ python3 computation.py --notrains 6
 
 Wyniki (wykresy ruchy) zostaną wyświetlone na ekranie, a wszystkie wyniki będą znajdować się w pliku `graficzne_wyniki`
 
-Wykresy ruchu kolejno problem początkowy, rozwiązanie optymalne i dwa różne rozwiązania symulowanego wyżarzania
+Wykresy ruchu kolejno (od lewej ) problem początkowy, rozwiązanie optymalne i dwa różne rozwiązania symulowanego wyżarzania
 
-<img src="pics/Wykres_ruchu_początkowy.jpg" width="200">
-<img src="pics/Wykres_ruchu_kalsyczne.jpg" width="200">
-<img src="pics/Wykres_ruchu_sym_wyżarzenie1.jpg" width="200">
-<img src="pics/Wykres_ruchu_sym_wyżarzenie2.jpg" width="200">
+<p float="left">
+<img src="pics/Wykres_ruchu_początkowy.jpg" width="150">
+<img src="pics/Wykres_ruchu_kalsyczne.jpg" width="150">
+<img src="pics/Wykres_ruchu_sym_wyżarzenie1.jpg" width="150">
+<img src="pics/Wykres_ruchu_sym_wyżarzenie2.jpg" width="150">
+</p>
 ---
 
 

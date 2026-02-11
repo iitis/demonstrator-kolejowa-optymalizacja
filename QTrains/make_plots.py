@@ -190,7 +190,7 @@ def train_path_data(v, p, exclude_st = "", initial_tt = False):
     return {"space": xs, "time":ys, "stations_loc": stations_loc}
 
 
-def plot_train_diagrams(input_dict, file, title = ""):
+def plot_train_diagrams1(input_dict, file, title = ""):
     "plotter of train diagrams"
 
     xs = input_dict["space"]
@@ -211,3 +211,39 @@ def plot_train_diagrams(input_dict, file, title = ""):
     plt.savefig(file)
     plt.show()
     plt.clf()
+
+
+def plot_train_diagrams(input_dict, file, title=""):
+    xs = input_dict["space"]
+    ys = input_dict["time"]
+    stations_loc = input_dict["stations_loc"]
+
+    fig, ax = plt.subplots(figsize=(4, 3))
+
+    for j in ys.keys():
+        ax.plot(ys[j], xs[j], "o-", label=f"p. {j}",
+                alpha=0.75, linewidth=1.5, markersize=2)
+
+    ax.legend(loc='upper center', bbox_to_anchor=(0.5, 1.63), ncol=4)
+
+    our_marks = [f"{key}" for key in stations_loc]
+    locs = list(stations_loc.values())
+
+    ax.set_title(f"wykres ruchu {title}")
+    ax.set_yticks(locs)
+    ax.set_yticklabels(our_marks)
+    ax.set_xlabel("minuty")
+    ax.set_ylabel("stacja")
+
+    fig.subplots_adjust(bottom=0.19, top=0.70)
+
+    # zapisz
+    fig.savefig(file)
+
+    # pokaż
+    plt.show()
+
+    # zamknij żeby kolejna iteracja była czysta
+    plt.close(fig)
+
+

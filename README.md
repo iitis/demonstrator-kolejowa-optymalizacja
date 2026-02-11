@@ -1,16 +1,16 @@
 # Komputery kwantowe w planowaniu transportu: studium przypadku Baltimore
 
-Nowoczesne komputery kwantowe, choć wciąż w fazie rozwoju i wrażliwe na szumy, otwierają zupełnie nowe możliwości w rozwiązywaniu bardzo trudnych problemów – takich, które dla klasycznych komputerów są niezwykle czasochłonne. W naszym badaniu pokazujemy, że te „szumy kwantowe” wcale nie są przeszkodą – mogą wręcz pomagać w znajdowaniu praktycznych rozwiązań.
+Nowoczesne komputery kwantowe, choć wciąż w fazie rozwoju i wrażliwe na szumy, otwierają zupełnie nowe możliwości w rozwiązywaniu bardzo trudnych problemów – takich, które dla klasycznych komputerów są niezwykle czasochłonne. W naszym badaniu pokazujemy, że te „szumy kwantowe” wcale nie stanowią przeszkody – mogą wręcz pomagać w znajdowaniu praktycznych rozwiązań.
 
-Przygotowaliśmy oprogramowanie, które pozwala na demonstracyjne testy problemów związanych z transportem publicznym. Do naszych eksperymentów wykorzystaliśmy symulator kwantowego wyżarzania firmy D-Wave, dzięki któremu mogliśmy generować i analizować różne scenariusze zarządzania ruchem pociągów w sytuacjach, gdy pojawiają się niespodziewane zakłócenia.
+Przygotowaliśmy oprogramowanie umożliwiające demonstracyjne testy problemów związanych z transportem publicznym. Do naszych eksperymentów wykorzystaliśmy symulator kwantowego wyżarzania firmy D-Wave, dzięki któremu mogliśmy generować i analizować różne scenariusze zarządzania ruchem pociągów w sytuacjach niespodziewanych zakłóceń.
 
-Jako przykład wybraliśmy system Baltimore Light RailLink, który łączy cechy tramwajów i kolei miejskiej. Naszym celem było sprawdzenie, czy technologia kwantowa może pomóc w przewidywaniu i planowaniu ruchu w takich zmiennych warunkach, gdzie klasyczne metody mogą mieć ograniczenia.
+Jako przykład wybraliśmy system Baltimore Light RailLink, łączący cechy tramwajów i kolei miejskiej. Naszym celem było sprawdzenie, czy technologia kwantowa może wspomagać przewidywanie i planowanie ruchu w zmiennych warunkach, w których klasyczne metody napotykają ograniczenia.
 
-Nasze badania pokazują, że komputery kwantowe mogą stać się pomocnym narzędziem w planowaniu i optymalizacji transportu, a naturalny „szum kwantowy” może w praktyce wspierać procesy decyzyjne w złożonych, nieprzewidywalnych systemach.
+Nasze badania pokazują, że komputery kwantowe mogą stać się wartościowym narzędziem w planowaniu i optymalizacji transportu, a naturalny „szum kwantowy” może w praktyce wspierać procesy decyzyjne w złożonych, nieprzewidywalnych systemach.
 
-Na podstawie:
-Domino, K., E. Doucet, R. Robertson, B. Gardas, i S. Deffner, “On the Baltimore Light RailLink into the quantum future”, Scientific Reports, vol. 15, issue 29576
-10.1038/s41598-025-15545-0
+**Źródło:**  
+Domino, K., E. Doucet, R. Robertson, B. Gardas, i S. Deffner, “On the Baltimore Light RailLink into the quantum future”, *Scientific Reports*, vol. 15, issue 29576, 10.1038/s41598-025-15545-0
+
 
 
 # Konfiguracja środowiska Python
@@ -127,31 +127,42 @@ Pliki:
 
 ---
 
-# Studium przypadku Baltimore Light RailLink  
+# Studium przypadku: Baltimore Light RailLink  
 
-Jest to system kolejowo-tramwajowy w amerykańskim mieście Baltimore, w centralnej części którego część torowiska przebiega wspólnie z ruchem ulicznym https://www.mta.maryland.gov/schedule/lightrail. Ten fragment, określany jako „strefa stochastyczna”, charakteryzuje się dużą nieprzewidywalnością czasów przejazdu, ponieważ pociągi są narażone na zakłócenia spowodowane ruchem drogowym. Z punktu widzenia badań był to idealny obszar testowy – ponieważ to właśnie niepewność i trudność przewidywania opóźnień stanowią największe wyzwanie dla klasycznych algorytmów planistycznych. Schematyczną reprezentację badanego fragmentu sieci Baltimore Light RailLink przedstawiono na Rysunku poniżej, a omówienie popularnonaukowe badań przygotowanie wspólnie z partnerem amerykańskim można odnaleźć w  https://umbc.edu/stories/quantum-on-track-for-train-scheduling/  oraz https://www.youtube.com/watch?v=xWKRhIeoCoA
+Baltimore Light RailLink to system kolejowo-tramwajowy w amerykańskim mieście Baltimore. W centralnej części miasta część torowiska przebiega wspólnie z ruchem ulicznym ([źródło](https://www.mta.maryland.gov/schedule/lightrail)). Ten fragment, określany jako „strefa stochastyczna”, charakteryzuje się dużą nieprzewidywalnością czasów przejazdu, ponieważ pociągi są narażone na zakłócenia spowodowane ruchem drogowym.  
 
-![Opis obrazka](pics/baltimore_rail.png)
+Z punktu widzenia badań był to idealny obszar testowy – niepewność i trudność przewidywania opóźnień stanowią bowiem największe wyzwanie dla klasycznych algorytmów planistycznych. Schematyczną reprezentację badanego fragmentu sieci Baltimore Light RailLink przedstawiono na poniższym rysunku.  
 
+Omówienie badań w formie popularnonaukowej, przygotowane wspólnie z partnerem amerykańskim, można znaleźć pod linkami:  
+- [Quantum on track for train scheduling – UMBC](https://umbc.edu/stories/quantum-on-track-for-train-scheduling/)  
+- [Film na YouTube](https://www.youtube.com/watch?v=xWKRhIeoCoA)  
 
-## Demonstracyjne harmonogramowanie pociagów na wskazanym wyżej odcinku
-
-W `computation.py` problemy harmonogramowania pociągów są rozwiązywane za pomocą programowania liniowego całkowitoliczbowego (ILP) oraz kwantowego (symulowanego) wyżarzania.
-
-Argumenty:
-
-* `--notrains` – liczba pociągów w problemie harmonogramowania, możliwe: ```1,2,4,6,8,10,11,12```
+![Schemat sieci Baltimore Light RailLink](pics/baltimore_rail.png)
 
 
-Przykład użycia:
+
+## Demonstracyjne harmonogramowanie pociągów na wskazanym odcinku
+
+W pliku `computation.py` problemy harmonogramowania pociągów są rozwiązywane przy użyciu programowania liniowego całkowitoliczbowego (ILP) oraz kwantowego (symulowanego) wyżarzania.
+
+### Wymagania
+
+* Do uruchomienia wymagana jest **Python 3**.
+
+### Argumenty
+
+* `--notrains` – liczba pociągów w problemie harmonogramowania. Dostępne wartości: `1, 2, 4, 6, 8, 10, 11, 12`.
+
+### Przykład użycia
 
 ```bash
 python3 computation.py --notrains 6
 ```
 
-Wyniki (wykresy ruchy) zostaną wyświetlone na ekranie, a wszystkie wyniki będą znajdować się w pliku `graficzne_wyniki`
+Po uruchomieniu wyniki (w tym wykresy ruchu) zostaną wyświetlone na ekranie, a wszystkie pliki z wynikami zostaną zapisane w katalogu ```graficzne_wyniki```.
 
-Wykresy ruchu kolejno (od lewej ) problem początkowy, rozwiązanie optymalne i dwa różne rozwiązania symulowanego wyżarzania
+
+Wykresy ruchu przedstawiają kolejno (od lewej): problem początkowy, rozwiązanie optymalne oraz dwa różne rozwiązania uzyskane metodą symulowanego wyżarzania.
 
 <p float="left">
 <img src="pics/Wykres_ruchu_początkowy.jpg" width="190">
@@ -160,7 +171,9 @@ Wykresy ruchu kolejno (od lewej ) problem początkowy, rozwiązanie optymalne i 
 <img src="pics/Wykres_ruchu_sym_wyżarzenie2.jpg" width="190">
 </p>
 
-gdzie p. znaczą numery pociągów.
+gdzie „p.” oznacza numery pociągów.
+
+Należy zwrócić uwagę, że symulowane wyżarzanie zwraca wiele różnych rozwiązań, a ich spektrum stanowi dobre wejście do systemu wspomagania decyzji, w którym ostateczną decyzję podejmuje człowiek – na przykład dyżurny ruchu.
 
 
 

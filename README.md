@@ -122,13 +122,14 @@ Pliki:
 
 ---
 
-# Baltimore light rail
+# Studium przypadku Baltimore Light RailLink  https://www.mta.maryland.gov/schedule/lightrail
+
+Jest to system kolejowo-tramwajowy w amerykańskim mieście Baltimore, w centralnej części którego część torowiska przebiega wspólnie z ruchem ulicznym. Ten fragment, określany jako „strefa stochastyczna”, charakteryzuje się dużą nieprzewidywalnością czasów przejazdu, ponieważ pociągi są narażone na zakłócenia spowodowane ruchem drogowym. Z punktu widzenia badań był to idealny obszar testowy – ponieważ to właśnie niepewność i trudność przewidywania opóźnień stanowią największe wyzwanie dla klasycznych algorytmów planistycznych. Schematyczną reprezentację badanego fragmentu sieci Baltimore Light RailLink przedstawiono na Rysunku poniżej, a omówienie popularnonaukowe badań przygotowanie wspólnie z partnerem amerykańskim można odnaleźć w  https://umbc.edu/stories/quantum-on-track-for-train-scheduling/  oraz https://www.youtube.com/watch?v=xWKRhIeoCoA
 
 ![Opis obrazka](pics/baltimore_rail.png)
 
 
-
-## Rozwiązywanie problemu pociągów
+## Demonstracyjne harmonogramowanie pociagów na wskazanym wyżej odcinku
 
 W `computation.py` problemy harmonogramowania pociągów są rozwiązywane za pomocą programowania liniowego całkowitoliczbowego (ILP) oraz kwantowego (symulowanego) wyżarzania.
 

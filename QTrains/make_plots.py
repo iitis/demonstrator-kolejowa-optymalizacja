@@ -209,4 +209,5 @@ def plot_train_diagrams(input_dict, file, title = ""):
     plt.ylabel("stacja")
     plt.subplots_adjust(bottom=0.19, top = 0.70)
     plt.savefig(file)
+    plt.show()
     plt.clf()

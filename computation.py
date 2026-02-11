@@ -14,7 +14,7 @@ from trains_timetable import Input_timetable, Comp_parameters
 
 
 
-def process(trains_input, q_pars, folder = "rysunki"):
+def process(trains_input, q_pars, folder = "graficzne_wyniki"):
     """ the sequence of calculation  makes computation if results has not been saved already"""
     
 
@@ -60,7 +60,7 @@ def process(trains_input, q_pars, folder = "rysunki"):
     file = Path(folder) / "Wykres_ruchu_sym_wyżarzenie1.pdf"
         
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
-    plot_train_diagrams(input_dict, file, " sym. wyżarzanie 1")
+    plot_train_diagrams(input_dict, file, " symulowane wyżarzanie 1")
 
     solution, _ = high_excited_state(solutions, qubo_to_analyze, trains_input.objective_stations, increased_pt=16)
     v = qubo_to_analyze.qubo2int_vars(solution)
@@ -68,7 +68,7 @@ def process(trains_input, q_pars, folder = "rysunki"):
     file =  file = Path(folder) / "Wykres_ruchu_sym_wyżarzenie2.pdf"
         
     input_dict = train_path_data(v, qubo_to_analyze, exclude_st = exclude_st)
-    plot_train_diagrams(input_dict, file, " sym. wyżarzanie 2")
+    plot_train_diagrams(input_dict, file, " symulowane wyżarzanie 2")
 
     
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         "--notrains",
         type=int,
         help="ilość pociągów w problemie harmonogramowania",
-        default=2,
+        default=4,
     )
 
     args = parser.parse_args()

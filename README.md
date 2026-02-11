@@ -114,11 +114,10 @@ Pliki:
 
 2. `tests` – kod testowy
 
-3. `solutions` – zapisane rozwiązania problemów kolejowych; jeśli dla określonych parametrów obliczenia zostały już wykonane i zapisane, nowe obliczenia nie będą uruchamiane, a plik nie zostanie nadpisany
+3. `pics` – pliki pomocnicze dokumentacji
 
-4. `QUBOs` – formulacje QUBO dla problemów kolejowych
+4. `graficzne_wyniki` – wyniki obliczeń w formie diagramów i wykresów
 
-5. `histograms` – histogramy z analizy danych
 
 ---
 

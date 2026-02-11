@@ -183,7 +183,7 @@ Materiał dofinansowana ze środków budżetu państwa w ramach programu Ministr
 „Nauka dla Społeczeństwa II”: nr projektu NdSII/SP/0336/2024/01, kwota dofinansowania ```1 000 000``` PLN, całkowita wartość projektu ```1 000 000``` PLN
 
 <p float="left">
-<img src="pics/01_znak_siatka_podstawowy_kolor_biale_tlo.jpg" width="250">
-<img src="pics/znaki_strona_www.png" width="250">
+<img src="pics/01_znak_siatka_podstawowy_kolor_biale_tlo.jpg" width="300">
 <img src="pics/mein_nds_cmyk_multicolor_black.jpg" width="190">
+<img src="pics/znaki_strona_www.png" width="250">
 </p>

@@ -135,7 +135,7 @@ W `computation.py` problemy harmonogramowania pociągów są rozwiązywane za po
 
 Argumenty:
 
-* `--notrains` – liczba pociągów w problemie harmonogramowania
+* `--notrains` – liczba pociągów w problemie harmonogramowania, możliwe: ```1,2,4,6,8,10,11,12```
 
 
 Przykład użycia:

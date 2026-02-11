@@ -153,10 +153,10 @@ Wyniki (wykresy ruchy) zostaną wyświetlone na ekranie, a wszystkie wyniki będ
 
 Wykresy ruchu kolejno problem początkowy, rozwiązanie optymalne i dwa różne rozwiązania symulowanego wyżarzania
 
-<img src="pics/Wykres_ruchu_początkowy.jpg" width="100">
-
-
-
+<img src="pics/Wykres_ruchu_początkowy.jpg" width="500">
+<img src="pics/Wykres_ruchu_kalsyczne.jpg" width="500">
+<img src="pics/Wykres_ruchu_sym_wyżarzenie1.jpg" width="500">
+<img src="pics/Wykres_ruchu_sym_wyżarzenie2.jpg" width="500">
 ---
 
 

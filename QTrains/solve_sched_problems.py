@@ -104,7 +104,7 @@ def solve_qubo1(q_pars, dict_read):
                 annealing_time=q_pars.annealing_time
         )
             
-    print(f"solved qubo method {q_pars.method}")
+    print(f"rozwiązuje problem QUBO metodą {q_pars.method}")
 
     return sampleset
     

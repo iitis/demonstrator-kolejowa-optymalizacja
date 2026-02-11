@@ -184,5 +184,5 @@ Materiał dofinansowana ze środków budżetu państwa w ramach programu Ministr
 
 <p float="left">
 <img src="01_znak_siatka_podstawowy_kolor_biale_tlo.png" width="190">
-<img src="mein_nds_cmyk_multicolor_black-imageonline.co-merged.png" width="190">
+<img src="mein_nds_cmyk_multicolor_black.jpg" width="190">
 </p>

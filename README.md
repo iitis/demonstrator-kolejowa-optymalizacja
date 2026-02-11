@@ -15,13 +15,14 @@ Domino, K., E. Doucet, R. Robertson, B. Gardas, i S. Deffner, “On the Baltimor
 
 # Konfiguracja środowiska Python
 
-Projekt wykorzystuje izolowane środowisko Pythona, aby zapewnić powtarzalność wyników oraz zgodność wersji bibliotek.  
+Projekt wykorzystuje izolowane środowisko Pythona 3, aby zapewnić powtarzalność wyników oraz zgodność wersji bibliotek.  
 
 Wszystkie polecenia należy wykonywać w katalogu głównym repozytorium.
 
 ---
 
 ## 1. Utworzenie środowiska wirtualnego
+
 
 ```bash
 # Linux / macOS
@@ -120,6 +121,12 @@ Pliki:
 5. `histograms` – histogramy z analizy danych
 
 ---
+
+# Baltimore light rail
+
+![Opis obrazka](pics/baltimore_rail.png)
+
+
 
 ## Rozwiązywanie problemu pociągów
 

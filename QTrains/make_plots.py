@@ -198,7 +198,7 @@ def plot_train_diagrams(input_dict, file, title = ""):
     stations_loc = input_dict["stations_loc"]
 
     for j in ys.keys():
-        plt.plot(ys[j], xs[j], "o-", label=f"p. {j} ", linewidth=0.85, markersize=2)
+        plt.plot(ys[j], xs[j], "o-", label=f"p. {j} ", alpha = 0.75,  linewidth=1.5, markersize=2)
         plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.63), ncol = 4)
 
     our_marks = [f"{key}" for key in stations_loc]
